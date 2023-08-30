@@ -40,3 +40,6 @@ if type rg &> /dev/null; then
   export FZF_DEFAULT_COMMAND='rg --files --hidden'
   export FZF_DEFAULT_OPTS='-m'
 fi
+
+# for Layer0
+export KUBECONFIG="$KUBECONFIG:${HOME}/.kube/layer0-sbx:${HOME}/.kube/layer0-dev:${HOME}/.kube/layer0-prod"

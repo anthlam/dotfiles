@@ -6,7 +6,7 @@
 
 [core]
 	autocrlf = input
-	excludesfile = /Users/anthlam/.gitignore_global
+	excludesfile = ~/.gitignore_global
 	editor = nvim
 
 [push]
@@ -65,3 +65,5 @@
   lineNumber = true
 [pull]
 	rebase = true
+[merge]
+	conflictStyle = diff3

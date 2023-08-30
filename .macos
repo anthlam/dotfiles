@@ -29,12 +29,13 @@ echo "installing Homebrew"
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
 echo "brew installing"
-curl https://raw.githubusercontent.com/anthlam/dotfiles/master/.brewfile | tee "${HOME}/.brewfile"
+# curl https://raw.githubusercontent.com/anthlam/dotfiles/master/.brewfile | tee "${HOME}/.brewfile"
 brew bundle --file="${HOME}/.brewfile"
-echo "*** Review caveats to see if there is anything that needs to be done"
+read -n1 -rsp $"*** Review caveats to see if there is anything that needs to be done. Press enter to continue or Ctrl+C to quit...\n" key
+rm "${HOME}/.brewfile"
 
 echo "setting up spacemacs"
-ln -s /usr/local/opt/emacs-mac/Emacs.app /Applications/
+ln -s $(brew --prefix)/opt/emacs-mac/Emacs.app /Applications/
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
 (cd ~/.emacs.d/ && git checkout develop)
 
@@ -45,7 +46,7 @@ eval "$(ssh-agent -s)"
 touch "${HOME}/.ssh/config"
 echo "Host *\n AddKeysToAgent yes\n UseKeychain yes\n IdentifyFile ~/.ssh/id_ed25519" | tee "${HOME}/.ssh/config"
 ssh-add -K "${HOME}/.ssh/id_ed25519"
-echo "*** run 'pbcopy < ~/.ssh/id_ed25519.pub' and paste that into Github"
+read -n1 -rsp $"*** run 'pbcopy < ~/.ssh/id_ed25519.pub' and paste that into Github. Press enter to continue or Ctrl+C to quit...\n" key"
 
 echo "cloning dotfiles"
 git clone git@github.com:anthlam/dotfiles.git "${HOME}/code/me/dotfiles"
@@ -55,6 +56,7 @@ ln -s "${HOME}/code/me/dotfiles/.aliases" "${HOME}/.aliases"
 ln -s "${HOME}/code/me/dotfiles/.bash_profile" "${HOME}/.bash_profile"
 ln -s "${HOME}/code/me/dotfiles/.bash_prompt" "${HOME}/.bash_prompt"
 ln -s "${HOME}/code/me/dotfiles/.bashrc" "${HOME}/.bashrc"
+ln -s "${HOME}/code/me/dotfiles/.brewfile" "${HOME}/.brewfile"
 ln -s "${HOME}/code/me/dotfiles/.exports" "${HOME}/.exports"
 ln -s "${HOME}/code/me/dotfiles/.functions" "${HOME}/.functions"
 ln -s "${HOME}/code/me/dotfiles/.gitconfig" "${HOME}/.gitconfig"
@@ -69,17 +71,18 @@ ln -s "${HOME}/code/me/dotfiles/.tmux.conf" "${HOME}/.tmux.conf"
 ln -s "${HOME}/code/me/dotfiles/.vimrc" "${HOME}/.vimrc"
 
 echo "changing shell to bash and reloading"
-echo "/usr/local/bin/bash" >> /etc/shells
-chsh -s /usr/local/bin/bash
+echo "$(brew --prefix)/bin/bash" >> /etc/shells
+chsh -s $(brew --prefix)/bin/bash
 exec "${SHELL}"
 
 echo "installing nvm"
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 
 echo "installing latest node lts"
 nvm install --lts --latest-npm
 echo "node --version: $(node --version)"
 echo "npm --version: $(npm --version)"
+read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" key
 
 
 echo -e "\nUI/UX Settings"
@@ -203,6 +206,7 @@ defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 #sudo rm -rf /System/Library/CoreServices/DefaultDesktop.jpg
 #sudo ln -s /path/to/your/image /System/Library/CoreServices/DefaultDesktop.jpg
 
+read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" key
 echo -e "\nMouse, Keyboard, Bluetooth Settings"
 ###############################################################################
 # Trackpad, mouse, keyboard, Bluetooth accessories, and input                 #
@@ -274,6 +278,7 @@ defaults write NSGlobalDomain InitialKeyRepeat -int 12
 # Stop iTunes from responding to the keyboard media keys
 #launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/null
 
+read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" key
 echo -e "\nPower Management Settings"
 ###############################################################################
 # Energy saving                                                               #
@@ -322,6 +327,7 @@ sudo systemsetup -setcomputersleep Never > /dev/null
 # …and make sure it can’t be rewritten
 # sudo chflags uchg /private/var/vm/sleepimage
 
+read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" key
 echo -e "\nScreen Settings"
 ###############################################################################
 # Screen                                                                      #
@@ -350,6 +356,7 @@ defaults write NSGlobalDomain AppleFontSmoothing -int 1
 # Enable HiDPI display modes (requires restart)
 # sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
 
+read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" key
 echo -e "\nFinder Settings"
 ###############################################################################
 # Finder                                                                      #
@@ -486,6 +493,7 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
 	OpenWith -bool true \
 	Privileges -bool true
 
+read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" key
 echo -e "\nDock Settings"
 ###############################################################################
 # Dock, Dashboard, and hot corners                                            #
@@ -600,6 +608,7 @@ defaults write com.apple.dock show-recents -bool false
 # defaults write com.apple.dock wvous-bl-corner -int 5
 # defaults write com.apple.dock wvous-bl-modifier -int 0
 
+read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" key
 echo -e "\nSafari/Webkit Settings"
 ###############################################################################
 # Safari & WebKit                                                             #
@@ -709,6 +718,7 @@ defaults write com.apple.Safari SendDoNotTrackHTTPHeader -bool true
 echo "automatic extension updates"
 defaults write com.apple.Safari InstallExtensionUpdatesAutomatically -bool true
 
+read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" key
 echo -e "\nMail Settings"
 ###############################################################################
 # Mail                                                                        #
@@ -737,6 +747,7 @@ defaults write com.apple.mail DraftsViewerAttributes -dict-add "DisplayInThreade
 # Disable automatic spell checking
 # defaults write com.apple.mail SpellCheckingBehavior -string "NoSpellCheckingEnabled"
 
+read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" key
 echo -e "\nSpotlight Settings"
 ###############################################################################
 # Spotlight                                                                   #
@@ -792,6 +803,7 @@ sudo mdutil -i on / > /dev/null
 echo "rebuild index"
 sudo mdutil -E / > /dev/null
 
+read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" key
 echo -e "\nTerminal & iTerm Settings"
 ###############################################################################
 # Terminal & iTerm 2                                                          #
@@ -866,6 +878,7 @@ defaults write com.apple.Terminal ShowLineMarks -int 0
 echo "don't prompt when quitting iterm"
 defaults write com.googlecode.iterm2 PromptOnQuit -bool false
 
+read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" key
 echo -e "\nTime Machine Settings"
 ###############################################################################
 # Time Machine                                                                #
@@ -878,6 +891,7 @@ defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 # Disable local Time Machine backups
 # hash tmutil &> /dev/null && sudo tmutil disablelocal
 
+read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" key
 echo -e "\nActivity Monitor Settings"
 ###############################################################################
 # Activity Monitor                                                            #
@@ -899,6 +913,7 @@ echo "sort by CPU usage"
 defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
 defaults write com.apple.ActivityMonitor SortDirection -int 0
 
+read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" key
 echo -e "\nUtility Settings"
 ###############################################################################
 # Address Book, Dashboard, iCal, TextEdit, and Disk Utility                   #
@@ -928,6 +943,7 @@ defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
 # Auto-play videos when opened with QuickTime Player
 # defaults write com.apple.QuickTimePlayerX MGPlayMovieOnOpen -bool true
 
+read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" key
 echo -e "\nApp Store Settings"
 ###############################################################################
 # Mac App Store                                                               #
@@ -969,6 +985,7 @@ defaults write com.apple.commerce AutoUpdate -bool true
 echo "disable app store reboot"
 defaults write com.apple.commerce AutoUpdateRestartRequired -bool false
 
+read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" key
 echo -e "\nPhotos Settings"
 ###############################################################################
 # Photos                                                                      #
@@ -978,6 +995,7 @@ echo -e "\nPhotos Settings"
 echo "don't open photos when devices are plugged in"
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 
+read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" key
 echo -e "\nMessages Settings"
 ###############################################################################
 # Messages                                                                    #
@@ -994,6 +1012,7 @@ defaults write com.apple.messageshelper.MessageController SOInputLineSettings -d
 echo "disable continuous spell check"
 defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "continuousSpellCheckingEnabled" -bool false
 
+read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" key
 echo -e "\nGoogle Chrome Settings"
 ###############################################################################
 # Google Chrome & Google Chrome Canary                                        #
@@ -1016,6 +1035,7 @@ echo "expand the print dialog by default"
 defaults write com.google.Chrome PMPrintingExpandedStateForPrint2 -bool true
 defaults write com.google.Chrome.canary PMPrintingExpandedStateForPrint2 -bool true
 
+read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" key
 echo -e "\nKilling Affected Applications"
 ###############################################################################
 # Kill affected applications                                                  #

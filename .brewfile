@@ -1,7 +1,10 @@
+tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "homebrew/core"
+tap "mongodb/brew"
 tap "railwaycat/emacsmacport"
+tap "hashicorp/tap"
 
 # terminal
 brew "bash"
@@ -20,9 +23,10 @@ brew "fzf"
 brew "vim"
 brew "neovim"
 brew "ctags"
-brew "cmake" # prereq for vterm
-brew "libvterm" # prereq for vterm
-brew "sqlite" # prereq for magit
+brew "cmake" # prereq for vterm/emacs
+brew "libvterm" # prereq for vterm/emacs
+brew "sqlite" # prereq for magit/emacs
+brew "ispell" # prereq for flyspell/emacs
 brew "gnu-tar" # prereq for emacs
 brew "emacs-mac", args: ["with-natural-title-bar", "with-spacemacs-icon"]
 brew "yamllint"
@@ -30,9 +34,17 @@ brew "yamllint"
 # productivity
 brew "mas"
 
-# command line tools
+# programming tools
+brew "hashicorp/tap/terraform"
+brew "tfenv"
 brew "grep"
+brew "mongodb/brew/mongodb-community"
 brew "jq"
+brew "groovy"
+brew "go"
+brew "k9s"
+brew "kubernetes-cli"
+brew "kubectx"
 
 # fonts
 cask "font-fira-code"
