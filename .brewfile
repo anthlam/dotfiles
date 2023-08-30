@@ -2,6 +2,8 @@ tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/core"
 tap "d12frosted/emacs-plus"
+tap "mongodb/brew"
+tap "hashicorp/tap"
 
 # terminal
 brew "bash"
@@ -36,10 +38,15 @@ brew "yamllint"
 brew "mas"
 brew "1password-cli"
 
-# command line tools
+# programming tools
+brew "hashicorp/tap/terraform"
+brew "tfenv"
 brew "grep"
+brew "mongodb/brew/mongodb-community"
 brew "jq"
 brew "go"
+brew "groovy"
+brew "k9s"
 brew "kubernetes-cli"
 brew "kubectx"
 brew "direnv"

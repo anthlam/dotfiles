@@ -1,1 +1,26 @@
 # git configuration specific to work repos
+[user]
+  email = anth.lamorte@okta.com
+  signingKey = 0B2AE1EC1472C496
+
+[commit]
+  gpgsign = true
+
+[core]
+	sshCommand = /Users/anth.lamorte/.git-helpers/git-ssh-ca-aurm
+
+[credential]
+	helper = /opt/homebrew/opt/bash/bin/bash /Users/anth.lamorte/.git-helpers/git-credential-okta-aurm --error --verbose -jq /opt/homebrew/bin/jq
+	useHttpPath = true
+
+[gpg]
+	program = /opt/homebrew/bin/gpg
+
+# added by github copilot CLI setup...i think
+[credential "https://github.com"]
+	helper =
+	helper = !/opt/homebrew/bin/gh auth git-credential
+
+[credential "https://gist.github.com"]
+	helper =
+	helper = !/opt/homebrew/bin/gh auth git-credential

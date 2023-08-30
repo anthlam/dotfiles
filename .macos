@@ -95,7 +95,8 @@ echo "installing latest node lts"
 nvm install --lts --latest-npm
 echo "node --version: $(node --version)"
 echo "npm --version: $(npm --version)"
-read -n1 -rsp $"Review output so far to see if it is safe to continue. macos configuration happens next. Press enter to continue or Ctrl+C to quit\n" key
+
+read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" key
 
 
 echo -e "\nUI/UX Settings"

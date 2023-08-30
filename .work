@@ -1,2 +1,31 @@
+#! /usr/bin/env bash
 # Add terminal stuff that you need for your job, but not personal, here
 # Typically you won't commit this back to dotfiles
+
+# for NPM auth pulling credentials from 1Password
+export A0US_NPM_USERNAME=op://Private/a0us-npm/username
+export A0US_NPM_AUTH=op://Private/a0us-npm/_auth
+# alias npm='op --account auth0 run -- npm --color=always'
+
+npm() {
+  if [[ "$1" == "login" ]]; then
+    op --account auth0 run -- npm --color=always "$@"
+  else
+    command npm "$@"
+  fi
+}
+
+# for AuRM
+export PATH="$PATH:$HOME/.local/bin"
+
+# for github copilot cli aliases
+eval "$(gh copilot alias -- bash)"
+
+# for Layer0
+export KUBECONFIG="$KUBECONFIG:${HOME}/.kube/layer0-sbx:${HOME}/.kube/layer0-dev:${HOME}/.kube/layer0-prod"
+
+# for prisma swg
+export NODE_EXTRA_CA_CERTS=${HOME}/.prisma-certs/prisma_certificates.pem
+
+# for work gpg signing setup
+export GPG_TTY=$(tty)

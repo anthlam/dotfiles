@@ -76,3 +76,6 @@
 
 [includeIf "gitdir:~/code/me/"]
   path = ~/.gitconfig.personal
+
+[includeIf "gitdir:~/code/auth0/"]
+  path = ~/.gitconfig.auth0
