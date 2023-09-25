@@ -663,6 +663,9 @@ before packages are loaded."
   ;; map buffer save to "sa" key chord
   (key-chord-define evil-normal-state-map "sa" 'save-buffer)
 
+  ;; change evil-escape key sequence from "fd" to "jk"
+  (setq-default evil-escape-key-sequence "jk")
+
   ;; zoom in/out/reset
   (global-set-key (kbd "C-=") 'spacemacs/zoom-frm-in)
   (global-set-key (kbd "C--") 'spacemacs/zoom-frm-out)
