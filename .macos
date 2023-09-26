@@ -69,6 +69,8 @@ echo "brew installing"
 brew bundle --file="${HOME}/.brewfile"
 read -n1 -rsp $"*** Review caveats to see if there is anything that needs to be done. Press enter to continue or Ctrl+C to quit...\n" key
 
+// TODO setup neovim init.vim to point at .vimrc
+
 echo "setting up spacemacs"
 ln -s $(brew --prefix)/opt/emacs-mac/Emacs.app /Applications/
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
@@ -153,17 +155,6 @@ defaults write com.apple.AppleMultitouchTrackpad TrackpadRightClick -bool true
 echo "enable full keyboard access for all controls (i.e. being able to tab through webforms)"
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 2
 
-# Use scroll gesture with the Ctrl (^) modifier key to zoom
-echo "enable Ctrl+two-finger-scroll for zooming in"
-defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
-defaults write com.apple.universalaccess HIDScrollZoomModifierMask -int 262144
-# Follow the keyboard focus while zoomed in
-defaults write com.apple.universalaccess closeViewZoomFollowsFocus -bool true
-
-# Disable press-and-hold for keys in favor of key repeat
-echo "disable press-and-hold"
-defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
-
 # Set a blazingly fast keyboard repeat rate
 echo "enable faster key repeat"
 defaults write NSGlobalDomain KeyRepeat -int 1
@@ -175,25 +166,9 @@ echo -e "\nPower Management Settings"
 # Energy saving                                                               #
 ###############################################################################
 
-# Enable lid wakeup
-echo "enable lid wakeup"
-sudo pmset -a lidwake 1
-
-# Restart automatically if the computer freezes
-echo "enable automatic restart on freeze"
-sudo systemsetup -setrestartfreeze on
-
-# Sleep the display after 15 minutes
-echo "set display sleep idle time to 15 minutes"
-sudo pmset -a displaysleep 15
-
-# Disable machine sleep while charging
-echo "disable machine sleep while plugged in"
-sudo pmset -c sleep 0
-
-# Set machine sleep to 15 minutes on battery
-echo "set machine sleep idle time to 15 minutes while unplugged"
-sudo pmset -b sleep 15
+# Sleep the display after 10 minutes
+echo "set display sleep idle time to 10 minutes"
+sudo pmset -a displaysleep 10
 
 # Never go into computer sleep mode
 echo "disable computer sleep after idle time"
@@ -204,11 +179,6 @@ echo -e "\nScreen Settings"
 ###############################################################################
 # Screen                                                                      #
 ###############################################################################
-
-# Require password immediately after sleep or screen saver begins
-echo "require password after sleep or screen saver"
-defaults write com.apple.screensaver askForPassword -int 1
-defaults write com.apple.screensaver askForPasswordDelay -int 0
 
 # Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
 echo "set screenshot format to PNG"
@@ -273,21 +243,9 @@ echo "set spring loading delay to 0"
 defaults write NSGlobalDomain com.apple.springing.delay -float 0
 
 # Avoid creating .DS_Store files on network or USB volumes
-echo "don't create .DS_Store on external/network volumes"
+echo "do not create .DS_Store on external/network volumes"
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
-
-# Disable disk image verification
-echo "disable disk image verification"
-defaults write com.apple.frameworks.diskimages skip-verify -bool true
-defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
-defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
-
-# Enable snap-to-grid for icons on the desktop and in other icon views
-echo "enable snap-to-grid"
-/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
-/usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
-/usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
 
 # Use column view in all Finder windows by default
 # Four-letter codes for the other view modes: `icnv`, `Nlsv`, `clmv`, `glyv`
@@ -297,14 +255,6 @@ defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
 # Disable the warning before emptying the Trash
 echo "disable warning before emptying trash"
 defaults write com.apple.finder WarnOnEmptyTrash -bool false
-
-# Enable AirDrop over Ethernet and on unsupported Macs running Lion
-echo "enable airdrop over ethernet"
-defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
-
-# Show the ~/Library folder
-echo "show ~/Library in finder"
-chflags nohidden ~/Library && xattr -d com.apple.FinderInfo ~/Library
 
 # Show the /Volumes folder
 echo "show /Volumes in finder"
@@ -365,7 +315,7 @@ echo "make dock icons of hidden apps translucent"
 defaults write com.apple.dock showhidden -bool true
 
 # Don’t show recent applications in Dock
-echo "don't show recent apps in dock"
+echo "do not show recent apps in dock"
 defaults write com.apple.dock show-recents -bool false
 
 read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" key
@@ -374,23 +324,10 @@ echo -e "\nSafari/Webkit Settings"
 # Safari & WebKit                                                             #
 ###############################################################################
 
-# Privacy: don’t send search queries to Apple
-echo "don't send search queries to Apple"
-defaults write com.apple.Safari UniversalSearchEnabled -bool false
-defaults write com.apple.Safari SuppressSearchSuggestions -bool true
-
 # Press Tab to highlight each item on a web page
 echo "tab can highlight each item on a web page"
 defaults write com.apple.Safari WebKitTabToLinksPreferenceKey -bool true
 defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2TabsToLinks -bool true
-
-# Show the full URL in the address bar (note: this still hides the scheme)
-echo "show full URL in address bar"
-defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true
-
-# Prevent Safari from opening ‘safe’ files automatically after downloading
-echo "don't open 'safe' files after downloading"
-defaults write com.apple.Safari AutoOpenSafeDownloads -bool false
 
 # Allow hitting the Backspace key to go to the previous page in history
 echo "backspace goes back to previous page"
@@ -433,11 +370,6 @@ defaults write com.apple.Safari AutoFillMiscellaneousForms -bool false
 echo "warn about fraudulent websites"
 defaults write com.apple.Safari WarnAboutFraudulentWebsites -bool true
 
-# Disable plug-ins
-echo "disable plugins"
-defaults write com.apple.Safari WebKitPluginsEnabled -bool false
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2PluginsEnabled -bool false
-
 # Disable Java
 echo "disable java"
 defaults write com.apple.Safari WebKitJavaEnabled -bool false
@@ -479,62 +411,6 @@ echo "display emails in threaded mode"
 defaults write com.apple.mail DraftsViewerAttributes -dict-add "DisplayInThreadedMode" -string "yes"
 
 read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" key
-echo -e "\nSpotlight Settings"
-###############################################################################
-# Spotlight                                                                   #
-###############################################################################
-
-# Hide Spotlight tray-icon (and subsequent helper)
-echo "hide spotlight tray icon"
-sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
-# Disable Spotlight indexing for any volume that gets mounted and has not yet
-# been indexed before.
-# Use `sudo mdutil -i off "/Volumes/foo"` to stop indexing any volume.
-echo "don't index mounted volumes"
-sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
-# Change indexing order and disable some search results
-# Yosemite-specific search results (remove them if you are using macOS 10.9 or older):
-# 	MENU_DEFINITION
-# 	MENU_CONVERSION
-# 	MENU_EXPRESSION
-# 	MENU_SPOTLIGHT_SUGGESTIONS (send search queries to Apple)
-# 	MENU_WEBSEARCH             (send search queries to Apple)
-# 	MENU_OTHER
-echo "change indexing order"
-defaults write com.apple.spotlight orderedItems -array \
-	'{"enabled" = 1;"name" = "APPLICATIONS";}' \
-	'{"enabled" = 1;"name" = "SYSTEM_PREFS";}' \
-	'{"enabled" = 1;"name" = "DIRECTORIES";}' \
-	'{"enabled" = 1;"name" = "PDF";}' \
-	'{"enabled" = 1;"name" = "FONTS";}' \
-	'{"enabled" = 0;"name" = "DOCUMENTS";}' \
-	'{"enabled" = 0;"name" = "MESSAGES";}' \
-	'{"enabled" = 0;"name" = "CONTACT";}' \
-	'{"enabled" = 0;"name" = "EVENT_TODO";}' \
-	'{"enabled" = 0;"name" = "IMAGES";}' \
-	'{"enabled" = 0;"name" = "BOOKMARKS";}' \
-	'{"enabled" = 0;"name" = "MUSIC";}' \
-	'{"enabled" = 0;"name" = "MOVIES";}' \
-	'{"enabled" = 0;"name" = "PRESENTATIONS";}' \
-	'{"enabled" = 0;"name" = "SPREADSHEETS";}' \
-	'{"enabled" = 0;"name" = "SOURCE";}' \
-	'{"enabled" = 0;"name" = "MENU_DEFINITION";}' \
-	'{"enabled" = 0;"name" = "MENU_OTHER";}' \
-	'{"enabled" = 0;"name" = "MENU_CONVERSION";}' \
-	'{"enabled" = 0;"name" = "MENU_EXPRESSION";}' \
-	'{"enabled" = 0;"name" = "MENU_WEBSEARCH";}' \
-	'{"enabled" = 0;"name" = "MENU_SPOTLIGHT_SUGGESTIONS";}'
-# Load new settings before rebuilding the index
-echo "load new settings before rebuilding index"
-killall mds > /dev/null 2>&1
-# Make sure indexing is enabled for the main volume
-echo "enable indexing for main volume"
-sudo mdutil -i on / > /dev/null
-# Rebuild the index from scratch
-echo "rebuild index"
-sudo mdutil -E / > /dev/null
-
-read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" key
 echo -e "\nTerminal & iTerm Settings"
 ###############################################################################
 # Terminal & iTerm 2                                                          #
@@ -554,7 +430,7 @@ echo "disable line marks"
 defaults write com.apple.Terminal ShowLineMarks -int 0
 
 # Don’t display the annoying prompt when quitting iTerm
-echo "don't prompt when quitting iterm"
+echo "do not prompt when quitting iterm"
 defaults write com.googlecode.iterm2 PromptOnQuit -bool false
 
 read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" key
@@ -616,10 +492,6 @@ defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1
 echo "install critical updates"
 defaults write com.apple.SoftwareUpdate CriticalUpdateInstall -int 1
 
-# Automatically download apps purchased on other Macs
-echo "download apps purchased on other macs"
-defaults write com.apple.SoftwareUpdate ConfigDataInstall -int 1
-
 # Turn on app auto-update
 echo "turn on auto update"
 defaults write com.apple.commerce AutoUpdate -bool true
@@ -627,16 +499,6 @@ defaults write com.apple.commerce AutoUpdate -bool true
 # Don't allow the App Store to reboot machine on macOS updates
 echo "disable app store reboot"
 defaults write com.apple.commerce AutoUpdateRestartRequired -bool false
-
-read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" key
-echo -e "\nPhotos Settings"
-###############################################################################
-# Photos                                                                      #
-###############################################################################
-
-# Prevent Photos from opening automatically when devices are plugged in
-echo "don't open photos when devices are plugged in"
-defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 
 read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" key
 echo -e "\nMessages Settings"
