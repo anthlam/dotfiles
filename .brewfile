@@ -45,6 +45,7 @@ brew "go"
 brew "k9s"
 brew "kubernetes-cli"
 brew "kubectx"
+brew "direnv"
 
 # fonts
 cask "font-fira-code"
