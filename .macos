@@ -71,6 +71,9 @@ read -n1 -rsp $"*** Review caveats to see if there is anything that needs to be 
 
 // TODO setup neovim init.vim to point at .vimrc
 
+echo "setup fzf key bindings and fuzzy completion"
+$(brew --prefix)/opt/fzf/install
+
 echo "setting up spacemacs"
 ln -s $(brew --prefix)/opt/emacs-mac/Emacs.app /Applications/
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
