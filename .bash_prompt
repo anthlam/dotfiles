@@ -97,7 +97,7 @@ prompt_dir() {
 
 # End the prompt
 prompt_end(){
-  echo -n "${RESET}${BOLD}\n${PROMPT} "
+  echo -n "${RESET}\n${PROMPT} "
 }
 
 build_prompt() {
