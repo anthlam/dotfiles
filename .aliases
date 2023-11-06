@@ -66,3 +66,4 @@ alias hdf="df -ah"
 
 # For work
 alias l0="layer0"
+alias kc="kubectl"
