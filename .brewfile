@@ -13,6 +13,7 @@ brew "coreutils"
 brew "tmux"
 brew "git"
 brew "bat"
+brew "shellcheck"
 
 # search
 brew "ripgrep"
