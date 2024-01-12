@@ -3,7 +3,7 @@
 ## Usage
 
 ### The easy way (untested)
-- From your `$HOME`, run 
+- From your `$HOME`, run
   ```
   curl https://raw.githubusercontent.com/anthlam/dotfiles/master/.macos | bash
   ```
@@ -49,3 +49,4 @@ don't want to the `.dotignore` file.
 
 ## TODO
 - Document `.secrets` setup/usage.
+- Document `.work` setup/usage.
