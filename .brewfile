@@ -1,8 +1,7 @@
 tap "homebrew/bundle"
 tap "homebrew/cask"
-tap "homebrew/cask-fonts"
 tap "homebrew/core"
-tap "railwaycat/emacsmacport"
+tap "d12frosted/emacs-plus"
 
 # terminal
 brew "bash"
@@ -30,7 +29,7 @@ brew "libvterm" # prereq for vterm/emacs
 brew "sqlite" # prereq for magit/emacs
 brew "ispell" # prereq for flyspell/emacs
 brew "gnu-tar" # prereq for emacs
-brew "emacs-mac", args: ["with-natural-title-bar", "with-spacemacs-icon"]
+brew "emacs-plus", args: ["with-spacemacs-icon", "with-native-comp"]
 brew "yamllint"
 
 # productivity
