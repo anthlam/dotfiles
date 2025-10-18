@@ -41,6 +41,27 @@ The `.macos` script will:
   - [Install RVM](https://rvm.io/rvm/install)
   - Install desired ruby versions using `rvm`
 
-## TODO
-- Document `.secrets` setup/usage.
-- Document `.work` setup/usage.
+## Environment-Specific Configuration
+
+### `.secrets` - Sensitive Data
+For API keys, tokens, and other secrets that should not be committed to the repo:
+
+1. Copy the example file:
+   ```bash
+   cp "${HOME}/code/me/dotfiles/.secrets.example" "${HOME}/.secrets"
+   ```
+2. Add your actual secret values to `~/.secrets`
+3. Secure the file: `chmod 600 ~/.secrets`
+
+This file is loaded by `.bashrc` but is never symlinked or committed to git.
+
+### `.work` - Work-Specific Configuration
+For work computer customizations (aliases, paths, functions) that differ from your personal setup:
+
+1. Copy the example file:
+   ```bash
+   cp "${HOME}/code/me/dotfiles/.work.example" "${HOME}/.work"
+   ```
+2. Add your work-specific configuration to `~/.work`
+
+This allows you to use the same dotfiles repo on both personal and work machines while maintaining environment-specific customizations.

@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+# .work - Work-specific bash configuration
+#
+# This file is loaded by .bashrc and should contain any configuration that is
+# specific to your work computer/environment.
+#
+# SETUP:
+# 1. Copy this file to ~/.work (it will be sourced from there, not symlinked)
+# 2. Add your work-specific configuration
+#
+# Use this to keep the same dotfiles repo for both personal and work machines
+# while customizing your work setup as needed.
+
+# Example work-specific aliases
+# alias ssh-work="ssh -i ~/.ssh/work_id_rsa"
+
+# Example work-specific environment variables
+# export WORK_REPO_PATH="${HOME}/code/work"
+# export JIRA_URL="https://yourcompany.atlassian.net"
+# export KUBECTL_CONTEXT="production"
+
+# Example work-specific PATH additions
+# export PATH="/opt/work-tools/bin:$PATH"
+
+# Example work-specific functions
+# work_deploy() {
+#   cd "${WORK_REPO_PATH}/$1" && kubectl apply -f deploy/
+# }
