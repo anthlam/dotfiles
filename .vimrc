@@ -31,6 +31,10 @@ Plug 'dense-analysis/ale'                | "syntax checker"
 Plug 'pangloss/vim-javascript'           | "JS indentation and syntax"
 Plug 'leafgarland/typescript-vim'        | "typescript syntax highlighting"
 
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }  | "golang support"
+
+Plug 'vim-ruby/vim-ruby'                 | "ruby syntax highlighting"
+
 Plug 'gertjanreynaert/cobalt2-vim-theme' | "Cobalt2 color scheme"
 
 call plug#end()
@@ -86,6 +90,7 @@ let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline_inactive_collapse=1
 let g:airline#extensions#tabline#enabled = 0
+let g:airline#extensions#ale#enabled = 1
 let g:airline_mode_map = {
     \ '__' : '-',
     \ 'n'  : 'N',
@@ -127,14 +132,16 @@ let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.7 } }
 let g:ale_lint_on_save = 1
 let g:ale_linters = {
 \   'javascript': ['eslint'],
-\   'typescript': ['tsserver', 'eslint']
+\   'typescript': ['tsserver', 'eslint'],
+\   'ruby': ['standardrb',]
 \}
 let g:ale_linters_explicit = 1
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['prettier', 'eslint'],
-\   'typescript': ['prettier', 'eslint']
+\   'typescript': ['prettier', 'eslint'],
+\   'ruby': ['standardrb']
 \}
 
 " change leader key
