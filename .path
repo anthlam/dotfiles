@@ -7,7 +7,7 @@ PATH="/usr/local/bin:$(getconf PATH)"
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # path
-# RVM_HOME=$HOME/.rvm/bin
-BREW_PYTHON_HOME=$(brew --prefix)/opt/python@3.12/bin
+RVM_HOME=$HOME/.rvm/bin
+BREW_PYTHON_HOME=$(brew --prefix python@3)/bin
 GO_BIN="$(go env GOPATH)/bin"
-PATH="$(brew --prefix)/Cellar:/usr/local/sbin:$BREW_PYTHON_HOME:$GO_BIN:$PATH"
+PATH="$(brew --prefix)/Cellar:/usr/local/sbin:$HOME/.local/bin:$BREW_PYTHON_HOME:$GO_BIN:$RVM_HOME:$PATH"
