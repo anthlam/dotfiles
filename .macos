@@ -26,14 +26,14 @@ echo "making 'code' directory"
 mkdir -p "${HOME}/code"
 
 echo "installing Homebrew"
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 echo "generating RSA token for Github"
 mkdir -p "${HOME}/.ssh"
 ssh-keygen -t ed25519 -C "lamorte+github@gmail.com"
 eval "$(ssh-agent -s)"
 touch "${HOME}/.ssh/config"
-echo "Host *\n AddKeysToAgent yes\n UseKeychain yes\n IdentifyFile ~/.ssh/id_ed25519" | tee "${HOME}/.ssh/config"
+echo "Host *\n AddKeysToAgent yes\n UseKeychain yes\n IdentityFile ~/.ssh/id_ed25519" | tee "${HOME}/.ssh/config"
 ssh-add --apple-use-keychain "${HOME}/.ssh/id_ed25519"
 read -n1 -rsp $"*** In another shell, run 'pbcopy < ~/.ssh/id_ed25519.pub' and paste that into Github. Dotfile linking and tool installation happens next. Press enter to continue or Ctrl+C to quit.\n" key
 
@@ -65,8 +65,9 @@ ln -s "${HOME}/code/me/dotfiles/.vimrc" "${HOME}/.vimrc"
 
 echo "installing latest bash and changing shell to bash"
 brew install bash
-echo "$(brew --prefix)/bin/bash" >> /etc/shells
-chsh -s "$(brew --prefix)/bin/bash"
+BREW_BASH="$(brew --prefix)/bin/bash"
+grep -qxF "${BREW_BASH}" /etc/shells || echo "${BREW_BASH}" | sudo tee -a /etc/shells
+chsh -s "${BREW_BASH}"
 exec "${SHELL}"
 
 echo "brew installing"

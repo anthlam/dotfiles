@@ -1,13 +1,11 @@
 .dotignore
 .git/
 .DS_Store
-bootstrap.sh
 *.md
 sublime/
 Anth-iterm-profile.json
 .bin/
 .tmuxinator/
-stellar.yaml
 iterm/
 .macos
 .github/

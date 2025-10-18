@@ -1,6 +1,0 @@
-logging: 30
-migrate_from_0_3_2: false
-project_name: ttm
-stellar_url: postgresql://localhost/stellar_data
-tracked_databases: [apangea_development, ttm_warehouse_development, ttm_etl_development]
-url: postgresql://localhost/template1
