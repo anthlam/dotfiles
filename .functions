@@ -85,3 +85,9 @@ _fzf_comprun() {
     *)            fzf "$@" ;;
   esac
 }
+
+# Update .brewfile with currently installed packages
+brewup() {
+  brew bundle dump --file="${HOME}/.brewfile" --force
+  echo "Updated .brewfile with currently installed packages"
+}
