@@ -53,6 +53,10 @@
 	sa = stash apply
 	ss = stash save
 
+	# Git-extras shortcuts
+	summary = summary --line		# Show repo summary stats
+	effort = effort --above 15		# Show file effort (commits per file)
+
 	# Ctags
 	ctags = !.git/hooks/ctags
 
