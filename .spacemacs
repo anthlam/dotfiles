@@ -100,6 +100,9 @@ This function should only modify configuration layer settings."
                 terraform-auto-format-on-save t
                 terraform-backend 'company-terraform)
      themes-megapack
+     (unicode-fonts :variables
+                    unicode-fonts-force-multi-color-on-mac t
+                    unicode-fonts-enable-ligatures t)
      (version-control :variables
                       version-control-diff-tool 'diff-hl
                       version-control-diff-side 'left
@@ -316,7 +319,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; Default font or prioritized list of fonts.
    dotspacemacs-default-font '("Fira Code"
-                               :size 14
+                               :size 15
                                :weight normal
                                :width normal)
 
@@ -602,7 +605,7 @@ default it calls `spacemacs/load-spacemacs-env' which loads the environment
 variables declared in `~/.spacemacs.env' or `~/.spacemacs.d/.spacemacs.env'.
 See the header of this file for more information."
   (spacemacs/load-spacemacs-env)
-)
+  )
 
 (defun dotspacemacs/user-init ()
   "Initialization for user code:
@@ -619,7 +622,7 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
 This function is called only while dumping Spacemacs configuration. You can
 `require' or `load' the libraries of your choice that will be included in the
 dump."
-)
+  )
 
 
 (defun dotspacemacs/user-config ()
@@ -689,9 +692,6 @@ before packages are loaded."
   ;; Git gutter
   (diff-hl-flydiff-mode)
   (set-fringe-style '(7 . 0))
-
-  ;; Enable Fira Code ligatures
-  (mac-auto-operator-composition-mode)
 
   ;; Use iterm2 with terminal-here
   (setq terminal-here-mac-terminal-command 'iterm2)
