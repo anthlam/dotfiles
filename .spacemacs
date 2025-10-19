@@ -112,7 +112,7 @@ This function should only modify configuration layer settings."
                  typescript-fmt-tool 'prettier
                  typescript-linter 'eslint
                  typescript-backend 'lsp)
-     treemacs
+     ;;treemacs
      (yaml :variables
            yaml-enable-lsp t)
      )
