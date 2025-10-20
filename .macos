@@ -60,7 +60,6 @@ ln -sf "${HOME}/code/me/dotfiles/.path" "${HOME}/.path"
 ln -sf "${HOME}/code/me/dotfiles/.profile" "${HOME}/.profile"
 ln -sf "${HOME}/code/me/dotfiles/.spacemacs" "${HOME}/.spacemacs"
 ln -sf "${HOME}/code/me/dotfiles/.tmux.conf" "${HOME}/.tmux.conf"
-ln -sf "${HOME}/code/me/dotfiles/.work" "${HOME}/.work"
 ln -sf "${HOME}/code/me/dotfiles/.vimrc" "${HOME}/.vimrc"
 
 echo "installing latest bash and changing shell to bash"
