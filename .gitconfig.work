@@ -7,10 +7,10 @@
   gpgsign = true
 
 [core]
-	sshCommand = /Users/anth.lamorte/.git-helpers/git-ssh-ca-aurm
+	sshCommand = /usr/local/bin/ocm handler ssh
 
 [credential]
-	helper = /opt/homebrew/opt/bash/bin/bash /Users/anth.lamorte/.git-helpers/git-credential-okta-aurm --error --verbose -jq /opt/homebrew/bin/jq
+	helper = /usr/local/bin/ocm handler https
 	useHttpPath = true
 
 [gpg]
