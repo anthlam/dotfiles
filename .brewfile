@@ -38,7 +38,7 @@ brew "yamllint"
 brew "mas"
 brew "1password-cli"
 
-# programming tools
+# command line tools
 brew "hashicorp/tap/terraform"
 brew "tfenv"
 brew "grep"
