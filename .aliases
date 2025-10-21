@@ -66,6 +66,3 @@ alias hdf="df -ah"
 
 # Kubernetes
 alias kc="kubectl"
-
-# For work
-alias l0="layer0"

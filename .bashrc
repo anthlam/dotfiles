@@ -24,9 +24,6 @@ shopt -s nocaseglob;
 # Need this so SSH passphrase isn't constantly asked for in tmux sessions
 ssh-add -A 2>/dev/null;
 
-# For Layer0
-eval "$(direnv hook bash)"
-
 # For nvm installed via homebrew
 # . $(brew --prefix nvm)/nvm.sh;
 
