@@ -29,7 +29,7 @@ brew "libvterm" # prereq for vterm/emacs
 brew "sqlite" # prereq for magit/emacs
 brew "aspell" # prereq for flyspell/emacs
 brew "gnu-tar" # prereq for emacs
-brew "emacs-plus", args: ["with-spacemacs-icon", "with-native-comp"]
+brew "emacs-plus", args: ["with-spacemacs-icon"]
 brew "yamllint"
 
 # productivity
