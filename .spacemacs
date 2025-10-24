@@ -54,7 +54,8 @@ This function should only modify configuration layer settings."
 
      emacs-lisp
      git
-     go
+     (go :variables
+         go-format-before-save t)
      (groovy :variables
              groovy-backend 'company-groovy)
      helm

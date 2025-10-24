@@ -57,7 +57,7 @@ highlight ColorColumn ctermbg=8
 set showcmd
 set cursorline
 
-" white space
+" Default white space settings
 set nowrap
 set expandtab
 set tabstop=2
@@ -65,6 +65,12 @@ set softtabstop=2
 set shiftwidth=2
 set autoindent
 set nojoinspaces
+
+" Go-specific white space settings (tabs with width 8)
+autocmd FileType go setlocal tabstop=8
+autocmd FileType go setlocal shiftwidth=8
+autocmd FileType go setlocal noexpandtab  " Use actual tabs
+autocmd FileType go setlocal softtabstop=0
 
 " searching
 set hlsearch
