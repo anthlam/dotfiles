@@ -48,6 +48,7 @@ This function should only modify configuration layer settings."
                       auto-completion-minimum-prefix-length 2
                       auto-completion-idle-delay 0.0
                       auto-completion-use-company-box t)
+     claude-code
      csv
      (docker :variables
              docker-dockerfile-backend 'lsp)
