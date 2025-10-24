@@ -57,8 +57,8 @@ This function should only modify configuration layer settings."
      git
      (go :variables
          go-format-before-save t)
-     (groovy :variables
-             groovy-backend 'company-groovy)
+     ;; (groovy :variables
+     ;;         groovy-backend 'company-groovy)
      helm
      html
      (javascript :variables
@@ -89,9 +89,9 @@ This function should only modify configuration layer settings."
           org-journal-time-format "")
      (osx :variables osx-right-command-as 'meta)
      prettier
-     (rust :variables
-           rust-backend 'lsp
-           rust-format-on-save t)
+     ;; (rust :variables
+     ;;       rust-backend 'lsp
+     ;;       rust-format-on-save t)
      (shell :variables
             shell-default-shell 'vterm
             spacemacs-vterm-history-file-location "~/.bash_history")
