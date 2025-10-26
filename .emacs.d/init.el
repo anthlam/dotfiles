@@ -79,16 +79,18 @@
 (use-package swiper
   :bind (("C-s" . swiper)))
 
+;; NOTE: Run M-x all-the-icons-install-fonts on new machine to install fonts
+(use-package all-the-icons
+  :if (display-graphic-p))
+
 (use-package doom-modeline
-  :ensure t
   :init (doom-modeline-mode 1))
 
 (use-package doom-themes
   :init (load-theme 'doom-monokai-octagon t))
 
 (use-package rainbow-delimiters
-  :config
-  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+  :hook (prog-mode . rainbow-delimiters-mode))
 
 (use-package which-key
   :init (which-key-mode)
