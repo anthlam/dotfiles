@@ -190,8 +190,10 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(command-log-mode commaond-log-mode counsel doom-modeline doom-themes
-		      helpful ivy ivy-rich rainbow-delimiters swiper)))
+   '(all-the-icons command-log-mode counsel-projectile doom-modeline
+		   doom-themes evil-collection evil-magit general
+		   helpful hydra ivy-rich magit magit-section
+		   rainbow-delimiters transient with-editor)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
