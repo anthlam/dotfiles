@@ -162,6 +162,22 @@
 
 (lal/leader-keys
   "ts" '(hydra-text-scale/body :which-key "zoom text"))
+
+(use-package projectile
+  :diminish projectile-mode
+  :config
+  (projectile-mode)
+  (projectile-discover-projects-in-search-path)
+  :custom ((projectile-completion-system 'ivy))
+  :bind-keymap
+  ("C-c p" . projectile-command-map)
+  :init
+  (when (file-directory-p "~/code/me")
+    (setq projectile-project-search-path '("~/code/me")))
+  (setq projectile-switch-project-action #'projectile-dired))
+
+(use-package counsel-projectile
+  :config (counsel-projectile-mode))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
