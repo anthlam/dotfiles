@@ -151,6 +151,17 @@
   :after evil
   :config
   (evil-collection-init))
+
+(use-package hydra)
+
+(defhydra hydra-text-zoom (:timeout 4)
+  "zoom text"
+  ("j" text-scale-increase "in")
+  ("k" text-scale-decrease "out")
+  ("f" nil "finished" :exit t))
+
+(lal/leader-keys
+  "ts" '(hydra-text-scale/body :which-key "zoom text"))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
