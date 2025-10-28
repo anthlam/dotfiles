@@ -184,6 +184,10 @@
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
+(lal/leader-keys
+  "g" '(:ignore t :which-key "git")
+  "gs" '(magit-status :which-key "magit status")
+  "gb" '(magit-blame :which-key "magit blame"))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
