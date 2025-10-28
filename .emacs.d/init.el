@@ -122,7 +122,12 @@
 
   (lal/leader-keys
    "t"  '(:ignore t :which-key "toggles")
-   "tt" '(counsel-load-theme :which-key "choose theme")))
+   "tt" '(counsel-load-theme :which-key "choose theme")
+   "b"  '(:ignore t :which-key "buffers")
+   "bb" '(counsel-ibuffer :which-key "switch buffer")
+   "bk" '(kill-buffer :which-key "kill buffer")
+   "bn" '(next-buffer :which-key "next buffer")
+   "bp" '(previous-buffer :which-key "previous buffer")))
 
 (use-package evil
   :init
