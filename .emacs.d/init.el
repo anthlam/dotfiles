@@ -189,6 +189,33 @@
   "g" '(:ignore t :which-key "git")
   "gs" '(magit-status :which-key "magit status")
   "gb" '(magit-blame :which-key "magit blame"))
+
+(defun lal/org-mode-setup ()
+  (org-indent-mode)
+  (visual-line-mode 1))
+
+(use-package org
+  :hook (org-mode . lal/org-mode-setup)
+  :config
+  (setq org-ellipsis " ▾"))
+
+(use-package org-bullets
+  :hook (org-mode . org-bullets-mode)
+  :custom
+  (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
+
+;; Set faces for org-mode heading levels
+(dolist (face '((org-level-1 . 1.2)
+                (org-level-2 . 1.1)
+                (org-level-3 . 1.05)
+                (org-level-4 . 1.0)
+                (org-level-5 . 1.1)
+                (org-level-6 . 1.1)
+                (org-level-7 . 1.1)
+                (org-level-8 . 1.1)))
+  (set-face-attribute (car face) nil :font "Fira Code Retina" :weight 'regular :height (cdr face)))
+
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -198,7 +225,8 @@
    '(all-the-icons command-log-mode counsel-projectile doom-modeline
 		   doom-themes evil-collection evil-magit general
 		   helpful hydra ivy-rich magit magit-section
-		   rainbow-delimiters transient with-editor)))
+		   org-bullets rainbow-delimiters transient
+		   with-editor)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
