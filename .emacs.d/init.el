@@ -212,6 +212,8 @@
 
 (use-package org
   :hook (org-mode . lal/org-mode-setup)
+  :bind (("C-c a" . org-agenda)
+	 ("C-c c" . org-capture))
   :config
   (setq org-ellipsis " ▾")
 
