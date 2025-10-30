@@ -199,16 +199,6 @@
   (org-indent-mode)
   (visual-line-mode 1))
 
-(use-package org
-  :hook (org-mode . lal/org-mode-setup)
-  :config
-  (setq org-ellipsis " ▾"))
-
-(use-package org-bullets
-  :hook (org-mode . org-bullets-mode)
-  :custom
-  (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
-
 ;; Set faces for org-mode heading levels
 (dolist (face '((org-level-1 . 1.2)
                 (org-level-2 . 1.1)
@@ -220,7 +210,66 @@
                 (org-level-8 . 1.1)))
   (set-face-attribute (car face) nil :font "Fira Code Retina" :weight 'regular :height (cdr face)))
 
+(use-package org
+  :hook (org-mode . lal/org-mode-setup)
+  :config
+  (setq org-ellipsis " ▾")
 
+  (setq org-agenda-start-with-log-mode t)
+  (setq org-log-done 'time)
+  (setq org-log-into-drawer t)
+
+  (setq org-agenda-files
+	'("~/code/me/org-mode-practice/Tasks.org"
+	  "~/code/me/org-mode-practice/birthdays.org"))
+
+  (setq org-todo-keywords
+	'((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")))
+
+  (setq org-refile-targets
+	'(("archive.org" :maxlevel . 1)
+	  ("tasks.org" :maxlevel . 1)))
+
+  ;; Save org buffers after a refile
+  (advice-add 'org-refile :after 'org-save-all-org-buffers)
+
+  (setq org-tag-alist
+    '((:startgroup)
+       ; Put mutually exclusive tags here
+       (:endgroup)
+       ("@errand" . ?E)
+       ("@home" . ?H)
+       ("@work" . ?W)
+       ("agenda" . ?a)
+       ("note" . ?n)
+       ("idea" . ?i)))
+
+  (setq org-agenda-custom-commands
+	'(("d" "Dashboard"
+	   ((agenda "" ((org-deadline-warning-days 7)))
+	    (todo "NEXT"
+		  ((org-agenda-overriding-header "Next Tasks")))
+	    (tags-todo "agenda/ACTIVE" ((org-agenda-overriding-header "Active Projects")))))
+
+	  ("n" "Next Tasks"
+	   ((todo "NEXT"
+		  ((org-agenda-overriding-header "Next Tasks")))))
+
+	  ("W" "Work Tasks" tags-todo "+work")
+
+	  ;; Low-effort next actions
+	  ("e" tags-todo "+TODO=\"NEXT\"+Effort<15&+Effort>0"
+	   ((org-agenda-overriding-header "Low Effort Tasks")
+	    (org-agenda-max-todos 20)
+	    (org-agenda-files org-agenda-files))))))
+
+(use-package org-bullets
+  :hook (org-mode . org-bullets-mode)
+  :custom
+  (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
+
+
+;; AUTO-GENERATED. DON'T TOUCH
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
