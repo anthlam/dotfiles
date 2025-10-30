@@ -221,9 +221,14 @@
   (setq org-log-done 'time)
   (setq org-log-into-drawer t)
 
+  (require 'org-habit)
+  (add-to-list 'org-modules 'org-habit)
+  (setq org-habit-graph-column 60)
+  
   (setq org-agenda-files
-	'("~/code/me/org-mode-practice/Tasks.org"
-	  "~/code/me/org-mode-practice/birthdays.org"))
+	'("~/code/me/org-mode-practice/tasks.org"
+	  "~/code/me/org-mode-practice/birthdays.org"
+	  "~/code/me/org-mode-practice/habits.org"))
 
   (setq org-todo-keywords
 	'((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")))
