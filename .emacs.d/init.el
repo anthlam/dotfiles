@@ -263,7 +263,42 @@
 	  ("e" tags-todo "+TODO=\"NEXT\"+Effort<15&+Effort>0"
 	   ((org-agenda-overriding-header "Low Effort Tasks")
 	    (org-agenda-max-todos 20)
-	    (org-agenda-files org-agenda-files))))))
+	    (org-agenda-files org-agenda-files)))))
+
+  (setq org-capture-templates
+	`(("t" "Tasks / Projects")
+	  ("tt" "Task" entry (file+olp "~/code/me/org-mode-practice/tasks.org" "Inbox")
+	   "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)
+	  ("ts" "Clocked Entry Subtask" entry (clock)
+	   "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)
+
+	  ("j" "Journal Entries")
+	  ("jj" "Journal" entry
+	   (file+olp+datetree "~/code/me/org-mode-practice/journal.org")
+	   "\n* %<%I:%M %p> - Journal :journal:\n\n%?\n\n"
+	   :clock-in :clock-resume
+	   :empty-lines 1)
+	  ("jm" "Meeting" entry
+	   (file+olp+datetree "~/code/me/org-mode-practice/journal.org")
+	   "* %<%I:%M %p> - %a :meetings:\n\n%?\n\n"
+	   :clock-in :clock-resume
+	   :empty-lines 1)
+
+	  ("w" "Workflows")
+	  ("we" "Checking Email" entry
+	   (file+olp+datetree "~/code/me/org-mode-practice/journal.org")
+	   "* Checking Email :email:\n\n%?"
+	   :clock-in :clock-resume
+	   :empty-lines 1)
+
+	  ("m" "Metrics Capture")
+	  ("mw" "Weight" table-line
+	   (file+headline "~/code/me/org-mode-practice/metrics.org" "Weight")
+	   "| %U | %^{Weight} | %^{Notes} |"
+	   :kill-buffer t)))
+  
+  (define-key global-map (kbd "C-c j")
+	      (lambda () (interative (org-capture nil "jj")))))
 
 (use-package org-bullets
   :hook (org-mode . org-bullets-mode)
