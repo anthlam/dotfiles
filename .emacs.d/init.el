@@ -1,3 +1,15 @@
+;; ===== BASE CONFIG =====
+;; Disable backup files
+(setq make-backup-files nil)
+
+;; Disable autosave files
+(setq auto-save-default nil)
+ 
+;; Keep customization settings out of init.el
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(when (file-exists-p custom-file)
+  (load custom-file))
+
 ;; ===== PACKAGE SYSTEM =====
 ;; Initialize package sources
 (require 'package)
@@ -92,11 +104,6 @@
 		shell-mode-hook
 		eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
-
-;; Keep customization settings out of init.el
-(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-(when (file-exists-p custom-file)
-  (load custom-file))
 
 ;; Font face and size
 (set-face-attribute 'default nil :font "Fira Code Retina" :height 150)

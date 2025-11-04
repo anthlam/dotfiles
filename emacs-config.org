@@ -1,6 +1,24 @@
 #+TITLE: Emacs Configuration
 #+PROPERTY: header-args:emacs-lisp :tangle ./.emacs.d/init.el :mkdirp yes
 
+* Base Configuration
+
+#+begin_src emacs-lisp
+
+  ;; ===== BASE CONFIG =====
+  ;; Disable backup files
+  (setq make-backup-files nil)
+
+  ;; Disable autosave files
+  (setq auto-save-default nil)
+   
+  ;; Keep customization settings out of init.el
+  (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+  (when (file-exists-p custom-file)
+    (load custom-file))
+
+#+end_src
+
 * Package System Configuration
 
 #+begin_src emacs-lisp
@@ -113,11 +131,6 @@
   		shell-mode-hook
   		eshell-mode-hook))
     (add-hook mode (lambda () (display-line-numbers-mode 0))))
-
-  ;; Keep customization settings out of init.el
-  (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-  (when (file-exists-p custom-file)
-    (load custom-file))
 
 #+end_src
 
