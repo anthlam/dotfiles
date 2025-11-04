@@ -93,6 +93,11 @@
 		eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
+;; Keep customization settings out of init.el
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(when (file-exists-p custom-file)
+  (load custom-file))
+
 ;; Font face and size
 (set-face-attribute 'default nil :font "Fira Code Retina" :height 150)
 
