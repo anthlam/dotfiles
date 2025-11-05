@@ -6,6 +6,11 @@
 #+begin_src emacs-lisp
 
   ;; ===== BASE CONFIG =====
+
+#+end_src
+
+#+begin_src emacs-lisp
+
   ;; Disable backup files
   (setq make-backup-files nil)
 
@@ -24,6 +29,11 @@
 #+begin_src emacs-lisp
 
   ;; ===== PACKAGE SYSTEM =====
+
+#+end_src
+
+#+begin_src emacs-lisp
+
   ;; Initialize package sources
   (require 'package)
 
@@ -49,6 +59,11 @@
 #+begin_src emacs-lisp
 
   ;; ===== KEYBINDINGS =====
+
+#+end_src
+
+#+begin_src emacs-lisp
+
   ;; Key-binding to open init.el
   (global-set-key (kbd "C-c e") (lambda () (interactive) (find-file "~/.emacs.d/init.el")))
 
@@ -105,11 +120,16 @@
 
 * UI Configuration
 
+#+begin_src emacs-lisp
+
+  ;; ===== UI =====
+
+#+end_src
+
 ** Basic
 
 #+begin_src emacs-lisp
 
-  ;; ===== UI =====
   (setq inhibit-startup-message t)    ; Don't show startup screen
 
   (scroll-bar-mode -1)    ; Disable visible scrollbar
@@ -249,11 +269,16 @@
 
 * Org Mode
 
+#+begin_src emacs-lisp
+
+  ;; ===== ORG MODE =====
+
+#+end_src
+
 ** Font Faces
 
 #+begin_src emacs-lisp
 
-  ;; ===== ORG MODE =====
   (defun lal/org-font-setup ()
     ;; Set faces for org-mode heading levels
     (dolist (face '((org-level-1 . 1.2)
@@ -429,11 +454,16 @@
 
 * Development
 
+#+begin_src emacs-lisp
+
+  ;; ===== DEVELOPMENT =====
+
+#+end_src
+
 ** Projectile
 
 #+begin_src emacs-lisp
 
-  ;; ===== DEVELOPMENT =====
   (use-package projectile
     :diminish projectile-mode
     :config

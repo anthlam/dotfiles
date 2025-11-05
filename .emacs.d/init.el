@@ -1,4 +1,5 @@
 ;; ===== BASE CONFIG =====
+
 ;; Disable backup files
 (setq make-backup-files nil)
 
@@ -11,6 +12,7 @@
   (load custom-file))
 
 ;; ===== PACKAGE SYSTEM =====
+
 ;; Initialize package sources
 (require 'package)
 
@@ -30,6 +32,7 @@
 (setq use-package-always-ensure t)
 
 ;; ===== KEYBINDINGS =====
+
 ;; Key-binding to open init.el
 (global-set-key (kbd "C-c e") (lambda () (interactive) (find-file "~/.emacs.d/init.el")))
 
@@ -83,6 +86,7 @@
   (evil-collection-init))
 
 ;; ===== UI =====
+
 (setq inhibit-startup-message t)    ; Don't show startup screen
 
 (scroll-bar-mode -1)    ; Disable visible scrollbar
@@ -177,6 +181,7 @@
   "ts" '(hydra-text-scale/body :which-key "zoom text"))
 
 ;; ===== ORG MODE =====
+
 (defun lal/org-font-setup ()
   ;; Set faces for org-mode heading levels
   (dolist (face '((org-level-1 . 1.2)
@@ -319,6 +324,7 @@
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'lal/org-babel-tangle-config)))
 
 ;; ===== DEVELOPMENT =====
+
 (use-package projectile
   :diminish projectile-mode
   :config
