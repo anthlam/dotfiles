@@ -429,20 +429,11 @@
 
 * Development
 
-** Rainbow Delimiters
-
-#+begin_src emacs-lisp
-
-  ;; ===== DEVELOPMENT =====
-  (use-package rainbow-delimiters
-    :hook (prog-mode . rainbow-delimiters-mode))
-
-#+end_src
-
 ** Projectile
 
 #+begin_src emacs-lisp
 
+  ;; ===== DEVELOPMENT =====
   (use-package projectile
     :diminish projectile-mode
     :config
@@ -474,5 +465,14 @@
     "g" '(:ignore t :which-key "git")
     "gs" '(magit-status :which-key "magit status")
     "gb" '(magit-blame :which-key "magit blame"))
+
+#+end_src
+
+** Rainbow Delimiters
+
+#+begin_src emacs-lisp
+
+  (use-package rainbow-delimiters
+    :hook (prog-mode . rainbow-delimiters-mode))
 
 #+end_src

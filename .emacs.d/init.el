@@ -319,9 +319,6 @@
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'lal/org-babel-tangle-config)))
 
 ;; ===== DEVELOPMENT =====
-(use-package rainbow-delimiters
-  :hook (prog-mode . rainbow-delimiters-mode))
-
 (use-package projectile
   :diminish projectile-mode
   :config
@@ -347,3 +344,6 @@
   "g" '(:ignore t :which-key "git")
   "gs" '(magit-status :which-key "magit status")
   "gb" '(magit-blame :which-key "magit blame"))
+
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
