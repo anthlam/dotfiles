@@ -149,6 +149,7 @@
   ;; Don't display line numbers for some modes
   (dolist (mode '(org-mode-hook
   		term-mode-hook
+  		treemacs-mode-hook
   		shell-mode-hook
   		eshell-mode-hook))
     (add-hook mode (lambda () (display-line-numbers-mode 0))))
@@ -459,6 +460,113 @@
 
   ;; ===== DEVELOPMENT =====
 
+#+end_src
+
+** Languages
+
+*** LSP Features
+
+**** lsp-mode
+
+Install lsp-mode to get language server protocol integration.
+
+#+begin_src emacs-lisp
+
+  (use-package lsp-mode
+    :commands (lsp lsp-deferred)
+    :init
+    (setq lsp-keymap-prefix "C-c l")
+    :config
+    (lsp-enable-which-key-integration t))
+
+#+end_src
+
+**** lsp-ui
+
+Adds UI enhancements for lsp-mode, like displaying symbols information and code actions in the sideline.
+
+#+begin_src emacs-lisp
+
+  (use-package lsp-ui
+    :hook (lsp-mode . lsp-ui-mode)
+    :custom
+    (lsp-ui-doc-position 'bottom))
+
+#+end_src
+
+***** TODO This isn't working properly.  The doc window and flycheck sideline messages aren't showing.
+
+**** lsp-treemacs
+
+Add treemacs lsp integration so that tree views can be displayed of more than just the project file structure.  For instance, symbols, references, and diagnostic messages.
+
+#+begin_src emacs-lisp
+
+  (use-package lsp-treemacs
+    :after lsp)
+  
+#+end_src
+
+**** lsp-ivy
+
+Enhance searching codebase for things like usages of a symbol.
+
+#+begin_src emacs-lisp
+
+  (use-package lsp-ivy)
+
+#+end_src
+
+*** Typescript
+
+Adds typescript support to emacs and enables lsp features for typescript-mode.
+
+#+begin_src emacs-lisp
+
+  (use-package typescript-mode
+    :mode "\\.ts\\'"
+    :hook (typescript-mode . lsp-deferred)
+    :config
+    (setq typescript-indent-level 2))
+  
+#+end_src
+
+**** TODO Emacs 29+ has built-in `typescript-ts-mode`, so this can probably go away.
+
+** Company Mode
+
+Adds better code completion than the built-in `completion-at-point`.
+
+#+begin_src emacs-lisp
+
+  ;; TODO this causes a weird screen shaking effect
+  (use-package company
+    :after lsp-mode
+    :hook (lsp-mode . company-mode)
+    :bind (:map company-active-map
+  	      ("<tab>" . company-complete-selection))
+          (:map lsp-mode-map
+  	      ("<tab>" . company-indent-or-complete-common))
+    :custom
+    (company-minimum-prefix-length 1)
+    (company-idle-delay 0.0))
+
+  (use-package company-box
+    :hook (company-mode . company-box-mode))
+
+#+end_src
+
+*** TODO The completion pop-up causes the shift and it really hurts my eyes.
+
+** Commenting
+
+Better code commenting that adds the ability to comment one or multiple lines with using a keybinding.
+
+#+begin_src emacs-lisp
+
+  (use-package evil-nerd-commenter
+    :bind ("M-/" . evilnc-comment-or-uncomment-lines))
+  
 #+end_src
 
 ** Projectile
