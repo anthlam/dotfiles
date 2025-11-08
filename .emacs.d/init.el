@@ -117,8 +117,7 @@
 (use-package doom-themes
   :init (load-theme 'doom-city-lights t))
 
-(use-package all-the-icons
-  :if (display-graphic-p))
+(use-package nerd-icons)
 
 (use-package doom-modeline
   :init (doom-modeline-mode 1))

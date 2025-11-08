@@ -188,19 +188,16 @@ Use a nice monospace font.
 
 ** Better Modeline
 
-Improve the modeline, adding nice icons.  Requires running `M-x all-the-icons-install-fonts` to get the icons.
+Improve the modeline, adding nice icons.  Requires running `M-x nerd-icons-install-fonts` to get the icons.
 
 #+begin_src emacs-lisp
 
-  (use-package all-the-icons
-    :if (display-graphic-p))
+  (use-package nerd-icons)
 
   (use-package doom-modeline
     :init (doom-modeline-mode 1))
 
 #+end_src
-
-*** TODO Still getting weird symbols in modeline after running `M-x all-the-icons-install-fonts`
 
 ** Which Key
 

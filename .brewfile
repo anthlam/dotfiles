@@ -47,6 +47,7 @@ brew "httpie"
 
 # fonts
 cask "font-fira-code"
+cask "font-fira-code-nerd-font"
 
 # mac app store apps
 mas "Xcode", id: 497799835
