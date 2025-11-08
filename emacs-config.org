@@ -3,6 +3,8 @@
 
 * Base Configuration
 
+Just the basics.
+
 #+begin_src emacs-lisp
 
   ;; ===== BASE CONFIG =====
@@ -25,6 +27,8 @@
 #+end_src
 
 * Package System Configuration
+
+Setup use-package.
 
 #+begin_src emacs-lisp
 
@@ -55,6 +59,8 @@
 #+end_src
 
 * Keybinding Configuration
+
+Setup some spacemacs-y evil keybindings.
 
 #+begin_src emacs-lisp
 
@@ -121,6 +127,8 @@
 
 * UI Configuration
 
+Make it pretty.
+
 #+begin_src emacs-lisp
 
   ;; ===== UI =====
@@ -128,6 +136,8 @@
 #+end_src
 
 ** Basic
+
+Make it minimalist.
 
 #+begin_src emacs-lisp
 
@@ -158,6 +168,8 @@
 
 ** Font Configuration
 
+Use a nice monospace font.
+
 #+begin_src emacs-lisp
 
   ;; Font face and size
@@ -170,15 +182,16 @@
 #+begin_src emacs-lisp
 
   (use-package doom-themes
-    :init (load-theme 'doom-monokai-octagon t))
+    :init (load-theme 'doom-monokai-pro t))
 
 #+end_src
 
 ** Better Modeline
 
+Improve the modeline, adding nice icons.  Requires running `M-x all-the-icons-install-fonts` to get the icons.
+
 #+begin_src emacs-lisp
 
-  ;; NOTE: Run M-x all-the-icons-install-fonts on new machine to install fonts
   (use-package all-the-icons
     :if (display-graphic-p))
 
@@ -187,7 +200,11 @@
 
 #+end_src
 
+*** TODO Still getting weird symbols in modeline after running `M-x all-the-icons-install-fonts`
+
 ** Which Key
+
+Adds the nice mini-buffer help displaying all possible completions for a give keybinding.
 
 #+begin_src emacs-lisp
     
@@ -200,6 +217,8 @@
 #+end_src
 
 ** Ivy and Counsel
+
+Adds a completion framework, like helm.  Counsel makes ivy better with custom versions of emacs commands like `counsel-find-file`. Ivy-rich gives nice descriptions of the commands in the completion buffer.
 
 #+begin_src emacs-lisp
 
@@ -238,6 +257,8 @@
 
 ** Helpful
 
+Enhances the help buffers displayed by `describe-` commands.
+
 #+begin_src emacs-lisp
 
   (use-package helpful
@@ -253,6 +274,8 @@
 #+end_src
 
 ** Text Zoom
+
+Add transient keybinding, using hydra, for scaling the text size up and down.
 
 #+begin_src emacs-lisp
 
@@ -539,7 +562,6 @@ Adds better code completion than the built-in `completion-at-point`.
 
 #+begin_src emacs-lisp
 
-  ;; TODO this causes a weird screen shaking effect
   (use-package company
     :after lsp-mode
     :hook (lsp-mode . company-mode)

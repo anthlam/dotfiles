@@ -117,7 +117,6 @@
 (use-package doom-themes
   :init (load-theme 'doom-monokai-pro t))
 
-;; NOTE: Run M-x all-the-icons-install-fonts on new machine to install fonts
 (use-package all-the-icons
   :if (display-graphic-p))
 
@@ -350,7 +349,6 @@
   :config
   (setq typescript-indent-level 2))
 
-;; TODO this causes a weird screen shaking effect
 (use-package company
   :after lsp-mode
   :hook (lsp-mode . company-mode)
