@@ -5,11 +5,17 @@
 
 ;; Disable autosave files
 (setq auto-save-default nil)
+
+;; Disable lock files
+(setq create-lockfiles nil)
  
 ;; Keep customization settings out of init.el
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (when (file-exists-p custom-file)
   (load custom-file))
+
+;; Save command history between sessions
+(savehist-mode 1)
 
 ;; ===== PACKAGE SYSTEM =====
 
@@ -17,16 +23,10 @@
 (require 'package)
 
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-			 ("org" . "https://orgmode.org/elpa/")
+			 ("nongnu" . "https://elpa.nongnu.org/nongnu/")
 			 ("elpa" . "https://elpa.gnu.org/packages/")))
 
 (package-initialize)
-(unless package-archive-contents
-  (package-refresh-contents))
-
-;; Initialize use-package on non-linux platforms
-(unless (package-installed-p 'use-package)
-  (package-install 'use-package))
 
 (require 'use-package)
 (setq use-package-always-ensure t)
