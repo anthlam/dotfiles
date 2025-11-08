@@ -336,7 +336,11 @@
 (use-package lsp-ui
   :hook (lsp-mode . lsp-ui-mode)
   :custom
-  (lsp-ui-doc-position 'bottom))
+  (lsp-ui-doc-position 'bottom)
+  (lsp-ui-doc-show-with-cursor t)
+  (lsp-ui-doc-delay 0.5)
+  (lsp-ui-sideline-show-code-actions t)
+  (lsp-ui-sideline-delay 0.5))
 
 (use-package lsp-treemacs
   :after lsp)
