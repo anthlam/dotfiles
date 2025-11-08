@@ -294,6 +294,8 @@ Add transient keybinding, using hydra, for scaling the text size up and down.
 
 * Org Mode
 
+Org-mode is incredible. I should really use it more.
+
 #+begin_src emacs-lisp
 
   ;; ===== ORG MODE =====
@@ -301,6 +303,8 @@ Add transient keybinding, using hydra, for scaling the text size up and down.
 #+end_src
 
 ** Font Faces
+
+Fiddle with the font sizes of the bullet point hierarchy.
 
 #+begin_src emacs-lisp
 
@@ -319,6 +323,8 @@ Add transient keybinding, using hydra, for scaling the text size up and down.
 #+end_src
 
 ** Basic
+
+All kinds of org-mode setup: basic installation and setup and keybindings, update TODO flow, refile targets, tag shortcuts, custom org-agenda commands, and capture templates for quick keybindings to capture certain things, like todos.
 
 #+begin_src emacs-lisp
 
@@ -358,7 +364,7 @@ Add transient keybinding, using hydra, for scaling the text size up and down.
 
     (setq org-tag-alist
   	'((:startgroup)
-  					; Put mutually exclusive tags here
+		; Put mutually exclusive tags here
   	  (:endgroup)
   	  ("@errand" . ?E)
   	  ("@home" . ?H)
@@ -427,6 +433,8 @@ Add transient keybinding, using hydra, for scaling the text size up and down.
 
 *** Bullets
 
+Change the icons used for the bullets.
+
 #+begin_src emacs-lisp
 
   (use-package org-bullets
@@ -437,6 +445,8 @@ Add transient keybinding, using hydra, for scaling the text size up and down.
 #+end_src
 
 ** Configure Babel Languages
+
+Add the ability to execute code for specific languages from org files.
 
 #+begin_src emacs-lisp
 
@@ -451,6 +461,8 @@ Add transient keybinding, using hydra, for scaling the text size up and down.
 
 ** Structure Templates
 
+Add shortcuts for adding code snippets for specific languages to org files.
+
 #+begin_src emacs-lisp
 
   (require 'org-tempo)
@@ -462,6 +474,8 @@ Add transient keybinding, using hydra, for scaling the text size up and down.
 #+end_src
 
 ** Auto-tangle Configuration Files
+
+Automatically generate init.el, from the snippets in this file, anytime this file is saved.
 
 #+begin_src emacs-lisp
 
@@ -593,6 +607,8 @@ Better code commenting that adds the ability to comment one or multiple lines wi
 
 ** Projectile
 
+Improve navigation of code projects.
+
 #+begin_src emacs-lisp
 
   (use-package projectile
@@ -615,6 +631,8 @@ Better code commenting that adds the ability to comment one or multiple lines wi
 
 ** Magit
 
+Maybe the best git editor integration every.  Possibly the whole reason to use emacs at all.
+
 #+begin_src emacs-lisp
 
   (use-package magit
@@ -630,6 +648,8 @@ Better code commenting that adds the ability to comment one or multiple lines wi
 #+end_src
 
 ** Rainbow Delimiters
+
+Make it easier to match opening and closing delimiters, especially in lisp ;-)
 
 #+begin_src emacs-lisp
 

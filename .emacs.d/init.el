@@ -231,7 +231,7 @@
 
   (setq org-tag-alist
 	'((:startgroup)
-					; Put mutually exclusive tags here
+		; Put mutually exclusive tags here
 	  (:endgroup)
 	  ("@errand" . ?E)
 	  ("@home" . ?H)
