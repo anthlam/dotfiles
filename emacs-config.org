@@ -515,6 +515,8 @@ Install lsp-mode to get language server protocol integration.
 
 #+end_src
 
+***** TODO Switch to eglot?
+
 **** lsp-ui
 
 Adds UI enhancements for lsp-mode, like displaying symbols information and code actions in the sideline.
@@ -567,7 +569,7 @@ Adds typescript support to emacs and enables lsp features for typescript-mode.
   
 #+end_src
 
-**** TODO Emacs 29+ has built-in `typescript-ts-mode`, so this can probably go away.
+**** TODO Emacs 29+ has built-in `typescript-ts-mode`, so this can probably get eliminated for something built-in using treesitter.
 
 ** Company Mode
 
