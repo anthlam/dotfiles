@@ -125,7 +125,7 @@
 
 (use-package which-key
   :init (which-key-mode)
-  :diminish which-key-name
+  :diminish which-key-mode
   :config
   (setq which-key-idle-delay 0.3))
 
@@ -179,7 +179,7 @@
   ("f" nil "finished" :exit t))
 
 (lal/leader-keys
-  "ts" '(hydra-text-scale/body :which-key "zoom text"))
+  "ts" '(hydra-text-zoom/body :which-key "zoom text"))
 
 ;; ===== ORG MODE =====
 
@@ -292,7 +292,7 @@
 	   :kill-buffer t)))
   
   (define-key global-map (kbd "C-c j")
-	      (lambda () (interative (org-capture nil "jj"))))
+	      (lambda () (interactive (org-capture nil "jj"))))
 
   (lal/org-font-setup))
 
