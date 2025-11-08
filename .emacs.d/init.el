@@ -59,7 +59,7 @@
 
 (use-package evil
   :init
-  (setq evil-want-integrqtion t)
+  (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
   (setq evil-want-C-u-scroll t)
   (setq evil-want-C-i-jump nil)
