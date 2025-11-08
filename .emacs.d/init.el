@@ -115,7 +115,7 @@
 (set-face-attribute 'default nil :font "Fira Code Retina" :height 150)
 
 (use-package doom-themes
-  :init (load-theme 'doom-monokai-pro t))
+  :init (load-theme 'doom-city-lights t))
 
 (use-package all-the-icons
   :if (display-graphic-p))

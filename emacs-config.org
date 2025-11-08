@@ -182,7 +182,7 @@ Use a nice monospace font.
 #+begin_src emacs-lisp
 
   (use-package doom-themes
-    :init (load-theme 'doom-monokai-pro t))
+    :init (load-theme 'doom-city-lights t))
 
 #+end_src
 
