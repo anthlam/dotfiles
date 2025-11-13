@@ -401,3 +401,47 @@
 
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
+
+(use-package term
+  :config
+  (setq explicit-shell-file-name "bash")
+  ;;(setq explicit-zsh-args '())
+  (setq term-prompt-regexp "^[^#$%>❱\n]*[#$%>❱] *"))
+
+(use-package eterm-256color
+  :hook (term-mode . eterm-256color-mode))
+
+(use-package vterm
+  :commands vterm
+  :config
+  (setq term-prompt-regexp "^[^#$%>❱\n]*[#$%>❱] *")
+  ;;(setq vterm-shell "zsh")
+  (setq vterm-max-scrollback 10000))
+
+(defun lal/configure-eshell()
+  ;; Save command history when commands are entered
+  (add-hook 'eshell-pre-command-hook 'eshell-save-some-history)
+
+  ;; Truncate buffer for performance
+  (add-to-list 'eshell-output-filter-functions 'eshell-truncate-buffer)
+
+  ;; Bind some useful keps for evil-mode
+  (evil-define-key '(normal insert visual) eshell-mode-map (kbd "C-r") 'counsel-esh-history)
+  (evil-define-key '(normal insert visual) eshell-mode-map (kbd "<home>") 'eshell-bol)
+  (evil-normalize-keymaps)
+
+  (setq eshell-history-size 10000
+	eshell-buffer-maximum-lines 10000
+	eshell-hist-ignoredups t
+	eshell-scroll-to-bottom-on-input 1))
+
+(use-package eshell-git-prompt)
+
+(use-package eshell
+  :hook (eshell-first-time-mode . lal/configure-eshell)
+  :config
+
+  (with-eval-after-load 'esh-opt
+    (setq eshell-discover-buffer-when-process-dies t))
+  
+  (eshell-git-prompt-use-theme 'powerline))

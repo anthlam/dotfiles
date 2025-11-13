@@ -660,3 +660,87 @@ Make it easier to match opening and closing delimiters, especially in lisp ;-)
     :hook (prog-mode . rainbow-delimiters-mode))
 
 #+end_src
+
+* Terminals
+
+** term-mode
+
+Term is built-in, so it won't get installed, but we can use use-package to configure it.
+
+#+begin_src emacs-lisp
+
+  (use-package term
+    :config
+    (setq explicit-shell-file-name "bash")
+    ;;(setq explicit-zsh-args '())
+    (setq term-prompt-regexp "^[^#$%>❱\n]*[#$%>❱] *"))
+
+#+end_src
+
+*** Better term-mode colors
+
+#+begin_src emacs-lisp
+
+  (use-package eterm-256color
+    :hook (term-mode . eterm-256color-mode))
+  
+#+end_src
+
+** vterm
+
+vterm is a better terminal emulator than term.  It's a native compiled module, so it's a bit faster. It's the best option for heavy terminal users.
+
+#+begin_src emacs-lisp
+
+  (use-package vterm
+    :commands vterm
+    :config
+    (setq term-prompt-regexp "^[^#$%>❱\n]*[#$%>❱] *")
+    ;;(setq vterm-shell "zsh")
+    (setq vterm-max-scrollback 10000))
+  
+#+end_src
+
+** eshell
+
+eshell is a shell implementation in emacs lisp.  It works cross-platform, which is handy for getting GNU utilities in Windows.
+
+It does not run interactive programs that present themselves visually well (i.e. vim, top, less, etc), but most of those are already setup in `eshell-visual-commands`, and will open in a new term buffer. It's also not great a piping, and other unix-y type things.
+
+It is also an Emacs Lisp REPL, so it can evaluate emacs lisp expressions.  
+
+You can also open the current directory in `dired` by running `dired .`.
+
+You can also pipe the output of a command to a buffer with something like `COMMAND > #<buffer BUFFER_NAME>`.
+
+#+begin_src emacs-lisp
+
+  (defun lal/configure-eshell()
+    ;; Save command history when commands are entered
+    (add-hook 'eshell-pre-command-hook 'eshell-save-some-history)
+
+    ;; Truncate buffer for performance
+    (add-to-list 'eshell-output-filter-functions 'eshell-truncate-buffer)
+
+    ;; Bind some useful keps for evil-mode
+    (evil-define-key '(normal insert visual) eshell-mode-map (kbd "C-r") 'counsel-esh-history)
+    (evil-define-key '(normal insert visual) eshell-mode-map (kbd "<home>") 'eshell-bol)
+    (evil-normalize-keymaps)
+
+    (setq eshell-history-size 10000
+  	eshell-buffer-maximum-lines 10000
+  	eshell-hist-ignoredups t
+  	eshell-scroll-to-bottom-on-input 1))
+
+  (use-package eshell-git-prompt)
+
+  (use-package eshell
+    :hook (eshell-first-time-mode . lal/configure-eshell)
+    :config
+
+    (with-eval-after-load 'esh-opt
+      (setq eshell-discover-buffer-when-process-dies t))
+    
+    (eshell-git-prompt-use-theme 'powerline))
+
+#+end_src
