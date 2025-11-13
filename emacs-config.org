@@ -744,3 +744,30 @@ You can also pipe the output of a command to a buffer with something like `COMMA
     (eshell-git-prompt-use-theme 'powerline))
 
 #+end_src
+
+* File Management
+
+** Dired
+
+Dired is built-in. Using use-package to configure it, hence `:ensure nil`.
+
+#+begin_src emacs-lisp
+
+  (use-package dired
+    :ensure nil
+    :commands (dired dired-jump)
+    :bind (("C-x C-j" . dired-jump))
+    :custom
+    (dired-listing-switches "-alghoF")
+    (dired-kill-when-opening-new-dired-buffer t)
+    (delete-by-moving-to-trash t)
+    :config
+    (evil-collection-define-key 'normal 'dired-mode-map
+      "h" 'dired-up-directory
+      "l" 'dired-find-file))
+
+  (use-package nerd-icons-dired
+    :hook
+    (dired-mode . nerd-icons-dired-mode))
+
+#+end_src

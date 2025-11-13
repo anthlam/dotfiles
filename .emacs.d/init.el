@@ -445,3 +445,20 @@
     (setq eshell-discover-buffer-when-process-dies t))
   
   (eshell-git-prompt-use-theme 'powerline))
+
+(use-package dired
+  :ensure nil
+  :commands (dired dired-jump)
+  :bind (("C-x C-j" . dired-jump))
+  :custom
+  (dired-listing-switches "-alghoF")
+  (dired-kill-when-opening-new-dired-buffer t)
+  (delete-by-moving-to-trash t)
+  :config
+  (evil-collection-define-key 'normal 'dired-mode-map
+    "h" 'dired-up-directory
+    "l" 'dired-find-file))
+
+(use-package nerd-icons-dired
+  :hook
+  (dired-mode . nerd-icons-dired-mode))
