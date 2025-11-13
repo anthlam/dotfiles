@@ -411,6 +411,8 @@
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 
+;; ===== TERMINALS =====
+
 (use-package term
   :config
   (setq explicit-shell-file-name "bash")
@@ -454,6 +456,8 @@
     (setq eshell-discover-buffer-when-process-dies t))
   
   (eshell-git-prompt-use-theme 'powerline))
+
+;; ===== FILE MGMT =====
 
 (use-package dired
   :ensure nil

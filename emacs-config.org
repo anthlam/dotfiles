@@ -680,6 +680,12 @@ Make it easier to match opening and closing delimiters, especially in lisp ;-)
 
 * Terminals
 
+#+begin_src emacs-lisp
+
+  ;; ===== TERMINALS =====
+
+#+end_src
+
 ** term-mode
 
 Term is built-in, so it won't get installed, but we can use use-package to configure it.
@@ -763,6 +769,12 @@ You can also pipe the output of a command to a buffer with something like `COMMA
 #+end_src
 
 * File Management
+
+#+begin_src emacs-lisp
+
+  ;; ===== FILE MGMT =====
+
+#+end_src
 
 ** Dired
 
