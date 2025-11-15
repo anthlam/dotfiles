@@ -60,7 +60,7 @@ Setup use-package.
 
 ** Automatic Package Updates
 
-Keep packages up to date automatically, prompting every 7 days.
+Keep packages up to date automatically, prompting every 30 days.
 
 #+begin_src emacs-lisp
 
@@ -204,7 +204,7 @@ Use a nice monospace font.
 
 ** Better Modeline
 
-Improve the modeline, adding nice icons.  Requires running `M-x nerd-icons-install-fonts` to get the icons.
+Improve the modeline, adding nice icons.  Requires running =M-x nerd-icons-install-fonts= to get the icons.
 
 #+begin_src emacs-lisp
 
@@ -231,7 +231,7 @@ Adds the nice mini-buffer help displaying all possible completions for a give ke
 
 ** Ivy and Counsel
 
-Adds a completion framework, like helm.  Counsel makes ivy better with custom versions of emacs commands like `counsel-find-file`. Ivy-rich gives nice descriptions of the commands in the completion buffer.
+Adds a completion framework, like helm.  Counsel makes ivy better with custom versions of emacs commands like ~counsel-find-file~. Ivy-rich gives nice descriptions of the commands in the completion buffer.
 
 #+begin_src emacs-lisp
 
@@ -270,7 +270,7 @@ Adds a completion framework, like helm.  Counsel makes ivy better with custom ve
 
 ** Helpful
 
-Enhances the help buffers displayed by `describe-` commands.
+Enhances the help buffers displayed by =describe-= commands.
 
 #+begin_src emacs-lisp
 
@@ -337,7 +337,14 @@ Fiddle with the font sizes of the bullet point hierarchy.
 
 ** Basic
 
-All kinds of org-mode setup: basic installation and setup and keybindings, update TODO flow, refile targets, tag shortcuts, custom org-agenda commands, and capture templates for quick keybindings to capture certain things, like todos.
+All kinds of org-mode setup:
+
+- basic installation and setup and keybindings
+- update TODO flow
+- refile targets
+- tag shortcuts
+- custom org-agenda commands
+- and capture templates for quick keybindings to capture certain things, like todos.
 
 #+begin_src emacs-lisp
 
@@ -585,11 +592,11 @@ Adds typescript support to emacs and enables lsp features for typescript-mode.
   
 #+end_src
 
-**** TODO Emacs 29+ has built-in `typescript-ts-mode`, so this can probably get eliminated for something built-in using treesitter.
+**** TODO Emacs 29+ has built-in =typescript-ts-mode=, so this can probably get eliminated for something built-in using treesitter.
 
 ** Company Mode
 
-Adds better code completion than the built-in `completion-at-point`.
+Adds better code completion than the built-in =completion-at-point=.
 
 #+begin_src emacs-lisp
 
@@ -687,7 +694,7 @@ Make it easier to match opening and closing delimiters, especially in lisp ;-)
 
 ** term-mode
 
-Term is built-in, so it won't get installed, but we can use use-package to configure it.
+Term is built-in, so it won't get installed, but we can use ~use-package~ to configure it.
 
 #+begin_src emacs-lisp
 
@@ -727,13 +734,13 @@ vterm is a better terminal emulator than term.  It's a native compiled module, s
 
 eshell is a shell implementation in emacs lisp.  It works cross-platform, which is handy for getting GNU utilities in Windows.
 
-It does not run interactive programs that present themselves visually well (i.e. vim, top, less, etc), but most of those are already setup in `eshell-visual-commands`, and will open in a new term buffer. It's also not great a piping, and other unix-y type things.
+It does not run interactive programs that present themselves visually well (i.e. vim, top, less, etc), but most of those are already setup in ~eshell-visual-commands~, and will open in a new term buffer. It's also not great a piping, and other unix-y type things.
 
 It is also an Emacs Lisp REPL, so it can evaluate emacs lisp expressions.  
 
-You can also open the current directory in `dired` by running `dired .`.
+You can also open the current directory in =dired= by running =dired .=.
 
-You can also pipe the output of a command to a buffer with something like `COMMAND > #<buffer BUFFER_NAME>`.
+You can also pipe the output of a command to a buffer with something like =COMMAND > #<buffer BUFFER_NAME>=.
 
 #+begin_src emacs-lisp
 
@@ -777,7 +784,7 @@ You can also pipe the output of a command to a buffer with something like `COMMA
 
 ** Dired
 
-Dired is built-in. Using use-package to configure it, hence `:ensure nil`.
+Dired is built-in. Using use-package to configure it, hence ~:ensure nil~.
 
 #+begin_src emacs-lisp
 
