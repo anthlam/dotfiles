@@ -37,8 +37,7 @@
   (auto-package-update-prompt-before-update t)
   (auto-package-update-hide-results t)
   :config
-  (auto-package-update-maybe)
-  (auto-package-update-at-time "09:00"))
+  (auto-package-update-maybe))
 
 ;; ===== KEYBINDINGS =====
 
