@@ -238,7 +238,7 @@
 
   (setq org-tag-alist
 	'((:startgroup)
-		; Put mutually exclusive tags here
+	  ;;Put mutually exclusive tags here
 	  (:endgroup)
 	  ("@errand" . ?E)
 	  ("@home" . ?H)
@@ -353,6 +353,23 @@
   :after lsp)
 
 (use-package lsp-ivy)
+
+(use-package dap-mode
+  ;; Uncomment the config below to hide all debug UI panes by default
+  ;; :custom
+  ;; (lsp-enable-dap-auto-configure nil)
+  ;; :config
+  ;; (dap-ui-mode 1)
+
+  :config
+  (require 'dap-node)
+  (dap-node-setup)
+
+  ;; Bind `C-c l d` to `dap-hydra` for easy access
+  (general-define-key
+   :keymaps 'lsp-mode-map
+   :prefix lsp-keymap-prefix
+   "d" '(dap-hydra t :wk "debugger")))
 
 (use-package typescript-mode
   :mode "\\.ts\\'"

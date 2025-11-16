@@ -384,7 +384,7 @@ All kinds of org-mode setup:
 
     (setq org-tag-alist
   	'((:startgroup)
-		; Put mutually exclusive tags here
+  	  ;;Put mutually exclusive tags here
   	  (:endgroup)
   	  ("@errand" . ?E)
   	  ("@home" . ?H)
@@ -578,6 +578,33 @@ Enhance searching codebase for things like usages of a symbol.
 
 #+end_src
 
+*** Debugging with dap-mode
+
+Sets up dap-mode for debugging and a key-binding for the dap-hydra pane for easier keybindings while debugging.  Currently only setup for the NodeJS debuging.
+
+This can pick up =.vscode/launch.json= debugger configs in NodeJS projects, but can also be paired with a =debug.el= that has a ~dap-register-debug-template~.
+
+#+begin_src emacs-lisp
+
+  (use-package dap-mode
+    ;; Uncomment the config below to hide all debug UI panes by default
+    ;; :custom
+    ;; (lsp-enable-dap-auto-configure nil)
+    ;; :config
+    ;; (dap-ui-mode 1)
+
+    :config
+    (require 'dap-node)
+    (dap-node-setup)
+
+    ;; Bind `C-c l d` to `dap-hydra` for easy access
+    (general-define-key
+     :keymaps 'lsp-mode-map
+     :prefix lsp-keymap-prefix
+     "d" '(dap-hydra t :wk "debugger")))
+
+#+end_src
+
 *** Typescript
 
 Adds typescript support to emacs and enables lsp features for typescript-mode.
@@ -589,7 +616,7 @@ Adds typescript support to emacs and enables lsp features for typescript-mode.
     :hook (typescript-mode . lsp-deferred)
     :config
     (setq typescript-indent-level 2))
-  
+
 #+end_src
 
 **** TODO Emacs 29+ has built-in =typescript-ts-mode=, so this can probably get eliminated for something built-in using treesitter.
