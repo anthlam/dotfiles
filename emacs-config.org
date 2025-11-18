@@ -126,6 +126,10 @@ Setup some spacemacs-y evil keybindings.
     ;; Use C-h as backspace in insert mode
     (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
 
+    ;; Add C-w u/U for winner-undo/redo
+    (define-key evil-window-map (kbd "u") 'winner-undo)
+    (define-key evil-window-map (kbd "U") 'winner-redo)
+
     ;; Use visual line motions even outside of visual-line-mode buffers
     (evil-global-set-key 'motion "j" 'evil-next-visual-line)
     (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
@@ -138,6 +142,16 @@ Setup some spacemacs-y evil keybindings.
     :after evil
     :config
     (evil-collection-init))
+
+  (lal/leader-keys
+    "w"  '(:ignore t :which-key "windows")
+    "wl" '(evil-window-right :which-key "window right")
+    "wh" '(evil-window-left :which-key "window left")
+    "wj" '(evil-window-down :which-key "window down")
+    "wk" '(evil-window-up :which-key "window up")
+    "ws" '(evil-window-split :which-key "split horizontal")
+    "wv" '(evil-window-vsplit :which-key "split vertial")
+    "wd" '(evil-window-delete :which-key "delete window"))
 
 #+end_src
 
