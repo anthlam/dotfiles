@@ -211,7 +211,8 @@ Improve the modeline, adding nice icons.  Requires running =M-x nerd-icons-insta
   (use-package nerd-icons)
 
   (use-package doom-modeline
-    :init (doom-modeline-mode 1))
+    :init (doom-modeline-mode 1)
+    :custom (doom-modeline-height 30))
 
 #+end_src
 
