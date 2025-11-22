@@ -59,7 +59,7 @@
     "t"  '(:ignore t :which-key "toggles")
     "tt" '(counsel-load-theme :which-key "choose theme")
     "b"  '(:ignore t :which-key "buffers")
-    "bb" '(counsel-ibuffer :which-key "switch buffer")
+    "bb" '(counsel-switch-buffer :which-key "switch buffer")
     "bd" '(kill-current-buffer :which-key "delete buffer")
     "bk" '(kill-buffer :which-key "kill buffer (select)")
     "bn" '(next-buffer :which-key "next buffer")
@@ -175,7 +175,7 @@
 
 (use-package counsel
   :bind (("M-x" . counsel-M-x)
-  	 ("C-x b" . counsel-ibuffer)
+  	 ("C-x b" . counsel-switch-buffer)
   	 ("C-x C-f" . counsel-find-file)
   	 :map minibuffer-local-map
   	 ("C-r" . 'counsel-minibuffer-history))
