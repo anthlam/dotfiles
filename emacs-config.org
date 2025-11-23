@@ -284,6 +284,20 @@ Adds a completion framework, like helm.  Counsel makes ivy better with custom ve
 
 #+end_src
 
+** Better candidate sorting and filtering
+
+prescient.el improves sorting and filtering of candidate lists, like those displayed in the mini-buffer with =M-x= or =C-x C-f=.  Recently used items will be put at the beginning of the list, and filtering can be done by typing the first letters of each segment of a candidate, such as =cff= for =counsel-find-file=.
+
+#+begin_src emacs-lisp
+
+  (use-package ivy-prescient
+    :after counsel
+    :config
+    (ivy-prescient-mode 1)
+    (prescient-persist-mode 1))
+
+#+end_src
+
 ** Helpful
 
 Enhances the help buffers displayed by =describe-= commands.

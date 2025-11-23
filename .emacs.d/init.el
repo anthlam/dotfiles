@@ -183,6 +183,12 @@
   :config
   (counsel-mode 1))
 
+(use-package ivy-prescient
+  :after counsel
+  :config
+  (ivy-prescient-mode 1)
+  (prescient-persist-mode 1))
+
 (use-package helpful
   :custom
   (counsel-describe-function-function #'helpful-callable)
