@@ -171,6 +171,7 @@
   (ivy-mode 1))
 
 (use-package ivy-rich
+  :after ivy
   :init
   (ivy-rich-mode 1))
 
@@ -330,18 +331,20 @@
   :custom
   (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
 
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((shell . t )
-   (emacs-lisp . t)
-   (python . t)
-   (js . t)))
+(with-eval-after-load 'org
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((shell . t )
+     (emacs-lisp . t)
+     (python . t)
+     (js . t))))
 
-(require 'org-tempo)
-(add-to-list 'org-structure-template-alist '("sh" . "src shell"))
-(add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
-(add-to-list 'org-structure-template-alist '("js" . "src js"))
-(add-to-list 'org-structure-template-alist '("py" . "src python"))
+(with-eval-after-load 'org
+  (require 'org-tempo)
+  (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
+  (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+  (add-to-list 'org-structure-template-alist '("js" . "src js"))
+  (add-to-list 'org-structure-template-alist '("py" . "src python")))
 
 ;; Automatically tangle our Emacs.org config file when we save it
 (defun lal/org-babel-tangle-config ()
@@ -374,7 +377,8 @@
 (use-package lsp-treemacs
   :after lsp)
 
-(use-package lsp-ivy)
+(use-package lsp-ivy
+  :after lsp)
 
 (use-package dap-mode
   ;; Uncomment the config below to hide all debug UI panes by default
@@ -382,6 +386,9 @@
   ;; (lsp-enable-dap-auto-configure nil)
   ;; :config
   ;; (dap-ui-mode 1)
+
+  ;; Delay loading package until used
+  :commands dap-debug
 
   :config
   (require 'dap-node)
@@ -434,6 +441,7 @@
   (setq projectile-switch-project-action #'projectile-dired))
 
 (use-package counsel-projectile
+  :after projectile
   :config (counsel-projectile-mode))
 
 (use-package magit
@@ -452,6 +460,7 @@
 ;; ===== TERMINALS =====
 
 (use-package term
+  :commands term
   :config
   (setq explicit-shell-file-name "bash")
   ;;(setq explicit-zsh-args '())
@@ -484,7 +493,8 @@
 	eshell-hist-ignoredups t
 	eshell-scroll-to-bottom-on-input 1))
 
-(use-package eshell-git-prompt)
+(use-package eshell-git-prompt
+  :after eshell)
 
 (use-package eshell
   :hook (eshell-first-time-mode . lal/configure-eshell)

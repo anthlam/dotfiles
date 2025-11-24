@@ -270,6 +270,7 @@ Adds a completion framework, like helm.  Counsel makes ivy better with custom ve
     (ivy-mode 1))
 
   (use-package ivy-rich
+    :after ivy
     :init
     (ivy-rich-mode 1))
 
@@ -496,30 +497,32 @@ Change the icons used for the bullets.
 
 ** Configure Babel Languages
 
-Add the ability to execute code for specific languages from org files.
+Add the ability to execute code for specific languages from org files.  Load after org-mode is loaded using =with-eval-after-load=.
 
 #+begin_src emacs-lisp
 
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((shell . t )
-     (emacs-lisp . t)
-     (python . t)
-     (js . t)))
+  (with-eval-after-load 'org
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((shell . t )
+       (emacs-lisp . t)
+       (python . t)
+       (js . t))))
 
 #+end_src
 
 ** Structure Templates
 
-Add shortcuts for adding code snippets for specific languages to org files.
+Add shortcuts for adding code snippets for specific languages to org files.  Load after org-mode is loaded using =with-eval-after-load=.
 
 #+begin_src emacs-lisp
 
-  (require 'org-tempo)
-  (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
-  (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
-  (add-to-list 'org-structure-template-alist '("js" . "src js"))
-  (add-to-list 'org-structure-template-alist '("py" . "src python"))
+  (with-eval-after-load 'org
+    (require 'org-tempo)
+    (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
+    (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+    (add-to-list 'org-structure-template-alist '("js" . "src js"))
+    (add-to-list 'org-structure-template-alist '("py" . "src python")))
 
 #+end_src
 
@@ -604,7 +607,8 @@ Enhance searching codebase for things like usages of a symbol.
 
 #+begin_src emacs-lisp
 
-  (use-package lsp-ivy)
+  (use-package lsp-ivy
+    :after lsp)
 
 #+end_src
 
@@ -622,6 +626,9 @@ This can pick up =.vscode/launch.json= debugger configs in NodeJS projects, but 
     ;; (lsp-enable-dap-auto-configure nil)
     ;; :config
     ;; (dap-ui-mode 1)
+
+    ;; Delay loading package until used
+    :commands dap-debug
 
     :config
     (require 'dap-node)
@@ -708,6 +715,7 @@ Improve navigation of code projects.
     (setq projectile-switch-project-action #'projectile-dired))
 
   (use-package counsel-projectile
+    :after projectile
     :config (counsel-projectile-mode))
 
 #+end_src
@@ -756,6 +764,7 @@ Term is built-in, so it won't get installed, but we can use ~use-package~ to con
 #+begin_src emacs-lisp
 
   (use-package term
+    :commands term
     :config
     (setq explicit-shell-file-name "bash")
     ;;(setq explicit-zsh-args '())
@@ -818,7 +827,8 @@ You can also pipe the output of a command to a buffer with something like =COMMA
   	eshell-hist-ignoredups t
   	eshell-scroll-to-bottom-on-input 1))
 
-  (use-package eshell-git-prompt)
+  (use-package eshell-git-prompt
+    :after eshell)
 
   (use-package eshell
     :hook (eshell-first-time-mode . lal/configure-eshell)
