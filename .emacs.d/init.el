@@ -427,8 +427,10 @@
 
   ;; Let LSP handle errors
   (setq js2-mode-show-parse-errors nil)
-  (setq js2-mode-show-strict-warnings nil)
+  (setq js2-mode-show-strict-warnings nil))
 
+;; lazy load dap-mode
+(with-eval-after-load 'js2-mode
   (require 'dap-node)
   (dap-node-setup))
 
@@ -436,7 +438,10 @@
   :mode "\\.ts\\'"
   :hook (typescript-mode . lsp-deferred)
   :config
-  (setq typescript-indent-level 2)
+  (setq typescript-indent-level 2))
+
+;; lazy load dap-mode
+(with-eval-after-load 'typescript-mode
   (require 'dap-node)
   (dap-node-setup))
 
@@ -445,7 +450,10 @@
   :hook ((go-mode . lsp-deferred)
 	 (before-save . gfmt-before-save))
   :config
-  (setq gofmt-command "goimports")
+  (setq gofmt-command "goimports"))
+
+;; lazy load dap-mode
+(with-eval-after-load 'go-mode
   (require 'dap-go)
   (dap-go-setup))
 
