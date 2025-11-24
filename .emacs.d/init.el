@@ -400,9 +400,6 @@
   :commands dap-debug
 
   :config
-  (require 'dap-node)
-  (dap-node-setup)
-
   ;; Bind `C-c l d` to `dap-hydra` for easy access
   (general-define-key
    :keymaps 'lsp-mode-map
@@ -413,7 +410,9 @@
   :mode "\\.ts\\'"
   :hook (typescript-mode . lsp-deferred)
   :config
-  (setq typescript-indent-level 2))
+  (setq typescript-indent-level 2)
+  (require 'dap-node)
+  (dap-node-setup))
 
 (use-package company
   :after lsp-mode

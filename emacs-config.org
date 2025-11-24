@@ -642,9 +642,6 @@ This can pick up =.vscode/launch.json= debugger configs in NodeJS projects, but 
     :commands dap-debug
 
     :config
-    (require 'dap-node)
-    (dap-node-setup)
-
     ;; Bind `C-c l d` to `dap-hydra` for easy access
     (general-define-key
      :keymaps 'lsp-mode-map
@@ -655,7 +652,7 @@ This can pick up =.vscode/launch.json= debugger configs in NodeJS projects, but 
 
 *** Typescript
 
-Adds typescript support to emacs and enables lsp features for typescript-mode.
+Adds typescript support to emacs and enables lsp features and dap-mode for typescript-mode.
 
 #+begin_src emacs-lisp
 
@@ -663,7 +660,9 @@ Adds typescript support to emacs and enables lsp features for typescript-mode.
     :mode "\\.ts\\'"
     :hook (typescript-mode . lsp-deferred)
     :config
-    (setq typescript-indent-level 2))
+    (setq typescript-indent-level 2)
+    (require 'dap-node)
+    (dap-node-setup))
 
 #+end_src
 
