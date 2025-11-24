@@ -226,6 +226,8 @@ Use a nice monospace font.
 
 #+end_src
 
+*** TODO try modus-themes
+
 ** Better Modeline
 
 Improve the modeline, adding nice icons.  Requires running =M-x nerd-icons-install-fonts= to get the icons.
