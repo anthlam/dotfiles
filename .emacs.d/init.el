@@ -389,6 +389,16 @@
 (use-package lsp-ivy
   :after lsp)
 
+(use-package yasnippet
+  :after lsp
+  :hook((prog-mode . yas-minor-mode)
+	(text-mode . yas-minor-mode))
+  :config
+  (yas-reload-all))
+
+(use-package yasnippet-snippets
+  :after yasnippet)
+
 (use-package dap-mode
   ;; Uncomment the config below to hide all debug UI panes by default
   ;; :custom

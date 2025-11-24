@@ -623,6 +623,24 @@ Enhance searching codebase for things like usages of a symbol.
 
 #+end_src
 
+**** yasnippet
+
+Add YASnippet to enable snippet support in lsp-mode.
+
+#+begin_src emacs-lisp
+
+  (use-package yasnippet
+    :after lsp
+    :hook((prog-mode . yas-minor-mode)
+  	(text-mode . yas-minor-mode))
+    :config
+    (yas-reload-all))
+
+  (use-package yasnippet-snippets
+    :after yasnippet)
+
+#+end_src
+
 *** Debugging with dap-mode
 
 Sets up dap-mode for debugging and a key-binding for the dap-hydra pane for easier keybindings while debugging.  Currently only setup for the NodeJS debuging.
