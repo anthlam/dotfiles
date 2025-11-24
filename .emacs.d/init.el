@@ -39,6 +39,9 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
+;; Verbose logging of package setup in messages buffer
+(setq use-package-verbose t)
+
 (use-package auto-package-update
   :custom
   (auto-package-update-interval 30)

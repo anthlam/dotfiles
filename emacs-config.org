@@ -64,6 +64,9 @@ Setup use-package.
   (require 'use-package)
   (setq use-package-always-ensure t)
 
+  ;; Verbose logging of package setup in messages buffer
+  (setq use-package-verbose t)
+
 #+end_src
 
 ** Automatic Package Updates
