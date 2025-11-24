@@ -668,6 +668,23 @@ Adds typescript support to emacs and enables lsp features and dap-mode for types
 
 **** TODO Emacs 29+ has built-in =typescript-ts-mode=, so this can probably get eliminated for something built-in using treesitter.
 
+*** Go
+
+Add Go support to emacs and enables lsp features and dap-mode for go-mode.
+
+#+begin_src emacs-lisp
+
+  (use-package go-mode
+    :mode "\\.go\\'"
+    :hook ((go-mode . lsp-deferred)
+  	 (before-save . gfmt-before-save))
+    :config
+    (setq gofmt-command "goimports")
+    (require 'dap-go)
+    (dap-go-setup))
+
+#+end_src
+
 ** Company Mode
 
 Adds better code completion than the built-in =completion-at-point=.

@@ -414,6 +414,15 @@
   (require 'dap-node)
   (dap-node-setup))
 
+(use-package go-mode
+  :mode "\\.go\\'"
+  :hook ((go-mode . lsp-deferred)
+	 (before-save . gfmt-before-save))
+  :config
+  (setq gofmt-command "goimports")
+  (require 'dap-go)
+  (dap-go-setup))
+
 (use-package company
   :after lsp-mode
   :hook (lsp-mode . company-mode)
