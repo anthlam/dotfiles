@@ -650,6 +650,27 @@ This can pick up =.vscode/launch.json= debugger configs in NodeJS projects, but 
 
 #+end_src
 
+*** Javascript
+
+Adds javascript support and enables lsp features and dap-mode for js2-mode.
+
+#+begin_src emacs-lisp
+
+  (use-package js2-mode
+    :mode "\\.js\\'"
+    :hook (js2-mode . lsp-deferred)
+    :config
+    (setq js2-basic-offset 2)
+
+    ;; Let LSP handle errors
+    (setq js2-mode-show-parse-errors nil)
+    (setq js2-mode-show-strict-warnings nil)
+
+    (require 'dap-node)
+    (dap-node-setup))
+
+#+end_src
+
 *** Typescript
 
 Adds typescript support to emacs and enables lsp features and dap-mode for typescript-mode.

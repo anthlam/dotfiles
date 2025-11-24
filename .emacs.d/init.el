@@ -406,6 +406,19 @@
    :prefix lsp-keymap-prefix
    "d" '(dap-hydra t :wk "debugger")))
 
+(use-package js2-mode
+  :mode "\\.js\\'"
+  :hook (js2-mode . lsp-deferred)
+  :config
+  (setq js2-basic-offset 2)
+
+  ;; Let LSP handle errors
+  (setq js2-mode-show-parse-errors nil)
+  (setq js2-mode-show-strict-warnings nil)
+
+  (require 'dap-node)
+  (dap-node-setup))
+
 (use-package typescript-mode
   :mode "\\.ts\\'"
   :hook (typescript-mode . lsp-deferred)
