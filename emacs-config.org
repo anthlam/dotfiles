@@ -29,6 +29,7 @@ Just the basics.
     (load custom-file 'noerror 'nomessage))
 
   ;; Save command history between sessions
+  (setq history-length 25)
   (savehist-mode 1)
 
 #+end_src

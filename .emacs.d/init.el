@@ -16,6 +16,7 @@
   (load custom-file 'noerror 'nomessage))
 
 ;; Save command history between sessions
+(setq history-length 25)
 (savehist-mode 1)
 
 ;; ===== PACKAGE SYSTEM =====
