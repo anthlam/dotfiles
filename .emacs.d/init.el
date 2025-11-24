@@ -19,6 +19,12 @@
 (setq history-length 25)
 (savehist-mode 1)
 
+;; Update buffers when underlying file has changed
+(global-auto-revert-mode 1)
+
+;; Update non-file-visiting buffers when the underlying changes happen, such as Dired buffers
+(setq global-auto-revert-non-file-buffers t)
+
 ;; ===== PACKAGE SYSTEM =====
 
 ;; Initialize package sources
