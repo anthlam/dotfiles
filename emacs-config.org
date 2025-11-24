@@ -175,14 +175,16 @@ Make it minimalist.
 
   (setq inhibit-startup-message t)    ; Don't show startup screen
 
-  (scroll-bar-mode -1)    ; Disable visible scrollbar
-  (tool-bar-mode -1)      ; Disable the toolbar
-  (tooltip-mode -1)       ; Disable tooltips
-  (set-fringe-mode 10)    ; Give some breathing room
+  (scroll-bar-mode -1)      ; Disable visible scrollbar
+  (tool-bar-mode -1)        ; Disable the toolbar
+  (tooltip-mode -1)         ; Disable tooltips
+  (set-fringe-mode 10)      ; Give some breathing room
 
-  (menu-bar-mode -1)      ; Disable the menu bar
+  (menu-bar-mode -1)        ; Disable the menu bar
 
-  (desktop-save-mode 1)   ; Auto-save and restore sessions
+  (desktop-save-mode 1)     ; Auto-save and restore sessions
+
+  (setq use-dialog-box nil) ; Don't show dialog box prompts
 
   ;; Display line numbers
   (column-number-mode)
