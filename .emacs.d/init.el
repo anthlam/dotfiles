@@ -143,7 +143,8 @@
 		term-mode-hook
 		treemacs-mode-hook
 		shell-mode-hook
-		eshell-mode-hook))
+		eshell-mode-hook
+		eat-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 ;; Font face and size
@@ -555,6 +556,11 @@
     (setq eshell-discover-buffer-when-process-dies t))
   
   (eshell-git-prompt-use-theme 'powerline))
+
+(use-package eat
+  :hook
+  (eshell-load . eat-eshell-mode)
+  (eshell-load . eat-eshell-visual-command-mode))
 
 ;; ===== FILE MGMT =====
 

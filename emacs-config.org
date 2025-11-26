@@ -204,7 +204,8 @@ Make it minimalist.
   		term-mode-hook
   		treemacs-mode-hook
   		shell-mode-hook
-  		eshell-mode-hook))
+  		eshell-mode-hook
+  		eat-mode-hook))
     (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 #+end_src
@@ -877,7 +878,7 @@ vterm is a better terminal emulator than term.  It's a native compiled module, s
 
 eshell is a shell implementation in emacs lisp.  It works cross-platform, which is handy for getting GNU utilities in Windows.
 
-It does not run interactive programs that present themselves visually well (i.e. vim, top, less, etc), but most of those are already setup in ~eshell-visual-commands~, and will open in a new term buffer. It's also not great a piping, and other unix-y type things.
+It does not run interactive programs that present themselves visually well (i.e. vim, top, less, etc), but most of those are already setup in ~eshell-visual-commands~, and will open in a new term buffer. It's also not great at piping, and other unix-y type things.
 
 It is also an Emacs Lisp REPL, so it can evaluate emacs lisp expressions.  
 
@@ -915,6 +916,19 @@ You can also pipe the output of a command to a buffer with something like =COMMA
       (setq eshell-discover-buffer-when-process-dies t))
     
     (eshell-git-prompt-use-theme 'powerline))
+
+#+end_src
+
+** eat
+
+Add Eat terminal emulator.  Not sure why, but had to run =M-x eat-compile-terminfo= to get rid of ~unknown terminal~ errors.
+
+#+begin_src emacs-lisp
+
+  (use-package eat
+    :hook
+    (eshell-load . eat-eshell-mode)
+    (eshell-load . eat-eshell-visual-command-mode))
 
 #+end_src
 
