@@ -932,6 +932,8 @@ Add Eat terminal emulator.  Not sure why, but had to run =M-x eat-compile-termin
 
 #+end_src
 
+*** TODO still a little janky.  figure out how to disable bash =C-r=, or how to get out of it.  figure out why copy paste doesn't work quite right.
+
 * File Management
 
 #+begin_src emacs-lisp
