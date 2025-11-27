@@ -449,7 +449,7 @@
 (use-package go-mode
   :mode "\\.go\\'"
   :hook ((go-mode . lsp-deferred)
-	 (before-save . gfmt-before-save))
+	 (before-save . gofmt-before-save))
   :config
   (setq gofmt-command "goimports"))
 
