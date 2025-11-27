@@ -966,3 +966,21 @@ Dired is built-in. Using use-package to configure it, hence ~:ensure nil~.
     (dired-mode . nerd-icons-dired-mode))
 
 #+end_src
+
+* AI Tools
+
+** Claude Code
+
+Add claude-code.el to integrate Claude Code.
+
+#+begin_src emacs-lisp
+
+  (use-package claude-code-ide
+    :vc (:url "https://github.com/manzaltu/claude-code-ide.el" :rev :newest)
+    :bind ("C-c c" . claude-code-ide-menu)
+    :config
+    (claude-code-ide-emacs-tools-setup)
+    :custom
+    (claude-code-ide-terminal-backend 'eat))
+
+#+end_src
