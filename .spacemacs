@@ -87,9 +87,7 @@ This function should only modify configuration layer settings."
           org-journal-time-format "")
      (osx :variables osx-right-command-as 'meta)
      prettier
-     (rust :variables
-           rust-backend 'lsp
-           rust-format-on-save t)
+     protobuf
      (shell :variables
             shell-default-shell 'vterm
             spacemacs-vterm-history-file-location "~/.bash_history")
@@ -101,6 +99,7 @@ This function should only modify configuration layer settings."
                 terraform-auto-format-on-save t
                 terraform-backend 'company-terraform)
      themes-megapack
+     toml
      (unicode-fonts :variables
                     unicode-fonts-force-multi-color-on-mac t
                     unicode-fonts-enable-ligatures t)
