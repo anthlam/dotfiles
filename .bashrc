@@ -6,18 +6,28 @@
 # ----- formerly .exports -----
 # default editor
 export EDITOR=nvim;
+export VISUAL=$EDITOR;
 export PSQL_EDITOR="vim -u NONE";
-export FCEDIT=$(brew --prefix)/bin/vim;
 export KUBE_EDITOR=$EDITOR;
 
-# nvm
-export NVM_DIR=~/.nvm;
-
-# CLI colors
+# appearance
 export CLICOLOR=1;
-
-# Colored grep output
 export GREP_OPTIONS="--color=auto";
+export LSCOLORS="ExGxbEaECxxEhEhBaDaCaD";
+# Support colors in less
+export LESS_TERMCAP_mb=$(tput bold; tput setaf 93);
+export LESS_TERMCAP_md=$(tput bold; tput setaf 93);
+export LESS_TERMCAP_me=$(tput sgr0);
+export LESS_TERMCAP_se=$(tput sgr0);
+export LESS_TERMCAP_so=$(tput bold; tput setaf 11; tput setab 27);
+export LESS_TERMCAP_ue=$(tput sgr0);
+export LESS_TERMCAP_us=$(tput smul; tput bold; tput setaf 6);
+export LESS_TERMCAP_mr=$(tput rev);
+export LESS_TERMCAP_mh=$(tput dim);
+export LESS_TERMCAP_ZN=$(tput ssubm);
+export LESS_TERMCAP_ZV=$(tput rsubm);
+export LESS_TERMCAP_ZO=$(tput ssupm);
+export LESS_TERMCAP_ZW=$(tput rsupm);
 
 # Place current directory in bash title/tab
 export PROMPT_COMMAND='echo -ne "\033]0; ${PWD##*/}\007"';
@@ -27,6 +37,9 @@ export HISTSIZE=25000;
 export HISTFILESIZE=10000;
 export HISTCONTROL=ignoredups:erasedups;
 export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND";
+
+# nvm
+export NVM_DIR=~/.nvm;
 
 # aws-vault config
 export AWS_VAULT_BACKEND=file;
