@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Ignore all of this if bash is running non-interactively (like when a script is run)
+[[ -n $PS1 ]] || return
+
 # Load all the shell dotfiles
 for file in ~/.{path,bash_prompt,exports,aliases,functions,work,secrets}; do
   [ -r "$file" ] && . "$file"
