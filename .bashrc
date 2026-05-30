@@ -12,9 +12,6 @@ unset file;
 # Enable Homebrew bash completion
 [[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]] && . "$(brew --prefix)/etc/profile.d/bash_completion.sh"
 
-# For bash completion
-# . ~/.bin/.tmuxinator.bash;
-
 # Append to bash history instead of overwriting
 shopt -s histappend;
 
@@ -26,9 +23,6 @@ shopt -s nocaseglob;
 
 # Need this so SSH passphrase isn't constantly asked for in tmux sessions
 ssh-add -A 2>/dev/null;
-
-# For nvm installed via homebrew
-# . $(brew --prefix nvm)/nvm.sh;
 
 command -v fzf >/dev/null 2>&1 && eval "$(fzf --bash)"
 [ -n "$BASH" ] && complete -F _fzf_complete_git -o default -o bashdefault git
