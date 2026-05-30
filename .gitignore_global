@@ -7,3 +7,5 @@ my-notes/
 db-backups/
 tags
 .tags
+
+**/.claude/settings.local.json
