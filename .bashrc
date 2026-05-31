@@ -4,17 +4,17 @@
 [[ -n $PS1 ]] || return
 
 # ----- formerly .exports -----
-# default editor
+## default editor
 export EDITOR=nvim;
 export VISUAL=$EDITOR;
 export PSQL_EDITOR="vim -u NONE";
 export KUBE_EDITOR=$EDITOR;
 
-# appearance
+## appearance
 export CLICOLOR=1;
 export GREP_OPTIONS="--color=auto";
 export LSCOLORS="ExGxbEaECxxEhEhBaDaCaD";
-# Support colors in less
+### Support colors in less
 export LESS_TERMCAP_mb=$(tput bold; tput setaf 93);
 export LESS_TERMCAP_md=$(tput bold; tput setaf 93);
 export LESS_TERMCAP_me=$(tput sgr0);
@@ -29,24 +29,24 @@ export LESS_TERMCAP_ZV=$(tput rsubm);
 export LESS_TERMCAP_ZO=$(tput ssupm);
 export LESS_TERMCAP_ZW=$(tput rsupm);
 
-# Place current directory in bash title/tab
+## Place current directory in bash title/tab
 export PROMPT_COMMAND='echo -ne "\033]0; ${PWD##*/}\007"';
 
-#share bash history across sessions/tabs
+## share bash history across sessions/tabs
 export HISTSIZE=25000;
 export HISTFILESIZE=10000;
 export HISTCONTROL=ignoredups:erasedups;
 export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND";
 
-# nvm
+## nvm
 export NVM_DIR=~/.nvm;
 
-# aws-vault config
+## aws-vault config
 export AWS_VAULT_BACKEND=file;
 export AWS_ASSUME_ROLE_TTL=4h
 export AWS_SESSION_TTL=4h
 
-# make fzf use ripgrep
+## make fzf use ripgrep
 if type rg &> /dev/null; then
   export FZF_DEFAULT_COMMAND='rg --files --hidden'
   export FZF_DEFAULT_OPTS='-m --color="dark,fg:6"'
