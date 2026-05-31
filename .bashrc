@@ -146,3 +146,5 @@ command -v fzf >/dev/null 2>&1 && eval "$(fzf --bash)"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+# ----- EVERYTHING BELOW HERE WAS AUTOMATICALLY ADDED, PROBABLY BY SOME STUPID WORK BULLSHIT -----
