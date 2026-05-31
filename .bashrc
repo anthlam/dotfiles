@@ -82,11 +82,17 @@ unset file;
 # Append to bash history instead of overwriting
 shopt -s histappend;
 
-# Autocorrect typos in paths on cd command
+# cd changes (autocd and dirspell require Bash >= 4)
 shopt -s cdspell;
+shopt -s autocd   2>/dev/null || true;
+shopt -s dirspell 2>/dev/null || true;
 
-# Case-insensitive globbing
+# adjusts alignment after each command
+shopt -s checkwinsize;
+
+# globbing changes
 shopt -s nocaseglob;
+shopt -s extglob
 
 # Need this so SSH passphrase isn't constantly asked for in tmux sessions
 ssh-add -A 2>/dev/null;
