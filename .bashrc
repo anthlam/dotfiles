@@ -70,6 +70,23 @@ GO_BIN="$(go env GOPATH)/bin"
 PATH="$(brew --prefix)/Cellar:/usr/local/sbin:$HOME/.local/bin:$BREW_PYTHON_HOME:$GO_BIN:$RVM_HOME:$PATH"
 # ----- formerly .path -----
 
+# ----- shell options -----
+## Append to bash history instead of overwriting
+shopt -s histappend;
+
+## cd changes (autocd and dirspell require Bash >= 4)
+shopt -s cdspell;
+shopt -s autocd   2>/dev/null || true;
+shopt -s dirspell 2>/dev/null || true;
+
+## adjusts alignment after each command
+shopt -s checkwinsize;
+
+## globbing changes
+shopt -s nocaseglob;
+shopt -s extglob
+# ----- shell options -----
+
 # ----- formerly .aliases -----
 ## Navigation
 alias ..="cd .."
@@ -117,21 +134,6 @@ unset file;
 
 # Enable Homebrew bash completion
 [[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]] && . "$(brew --prefix)/etc/profile.d/bash_completion.sh"
-
-# Append to bash history instead of overwriting
-shopt -s histappend;
-
-# cd changes (autocd and dirspell require Bash >= 4)
-shopt -s cdspell;
-shopt -s autocd   2>/dev/null || true;
-shopt -s dirspell 2>/dev/null || true;
-
-# adjusts alignment after each command
-shopt -s checkwinsize;
-
-# globbing changes
-shopt -s nocaseglob;
-shopt -s extglob
 
 # Need this so SSH passphrase isn't constantly asked for in tmux sessions
 ssh-add -A 2>/dev/null;
