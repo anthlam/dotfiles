@@ -70,8 +70,47 @@ GO_BIN="$(go env GOPATH)/bin"
 PATH="$(brew --prefix)/Cellar:/usr/local/sbin:$HOME/.local/bin:$BREW_PYTHON_HOME:$GO_BIN:$RVM_HOME:$PATH"
 # ----- formerly .path -----
 
+# ----- formerly .aliases -----
+## Navigation
+alias ..="cd .."
+alias ...="cd ../.."
+alias ~="cd ~"
+alias -- -="cd -"
+
+## File management
+alias la="ls -alhFGT"       # ls all, long format, human-readable size, type identifiers, colorized, complete time
+alias lats="ls -alhtrFGT"     # la sorted by increasing time modified
+alias mv="mv -iv"
+alias cp="cp -Riv"
+alias mkdir="mkdir -vp"
+
+## git shortcuts
+alias gdmb="git remote prune origin | grep '] origin/' | sed 's/^.*origin\///g' | xargs -L1 -J % git branch -D %"  # Delete branches that have been deleted on the remote repository (works with squash&merge repos)
+
+## ctags
+alias actags="rm tags; ctags --exclude=.git --exclude=vendor --exclude=node_modules --exclude=coverage --exclude=public -R .;"
+
+## Reloading profile
+alias sop="source ~/.bash_profile;"
+
+## Better silver searcher default
+alias ag="ag --hidden --path-to-ignore ~/.ignore"
+
+## Tmux
+alias tls="tmux ls"
+alias tk="tmux kill-server"
+
+## Disk Usage
+alias hdu1="du -hd1 | sort -rh"
+alias hdf="df -ah"
+
+# Kubernetes
+alias kc="kubectl"
+
+# ----- formerly .aliases -----
+
 # Load all the shell dotfiles
-for file in ~/.{bash_prompt,aliases,functions,work,secrets}; do
+for file in ~/.{bash_prompt,functions,work,secrets}; do
   [ -r "$file" ] && . "$file"
 done;
 unset file;
