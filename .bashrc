@@ -3,7 +3,7 @@
 # Ignore all of this if bash is running non-interactively (like when a script is run)
 [[ -n $PS1 ]] || return
 
-# ----- formerly .exports -----
+# ----- environment -----
 ## default editor
 export EDITOR=nvim;
 export VISUAL=$EDITOR;
@@ -52,9 +52,9 @@ if type rg &> /dev/null; then
   export FZF_DEFAULT_OPTS='-m --color="dark,fg:6"'
   export FZF_COMPLETION_DIR_COMMANDS="cd pushd rmdir tree"
 fi
-# ----- formerly .exports -----
+# ----- environment -----
 
-# ----- formerly .path -----
+# ----- PATH -----
 ## reset path
 PATH="/usr/local/bin:$(getconf PATH)"
 
@@ -68,7 +68,7 @@ GO_BIN="$(go env GOPATH)/bin"
 
 ## set path
 PATH="$(brew --prefix)/Cellar:/usr/local/sbin:$HOME/.local/bin:$BREW_PYTHON_HOME:$GO_BIN:$RVM_HOME:$PATH"
-# ----- formerly .path -----
+# ----- PATH -----
 
 # ----- shell options -----
 ## Append to bash history instead of overwriting
@@ -87,7 +87,7 @@ shopt -s nocaseglob;
 shopt -s extglob
 # ----- shell options -----
 
-# ----- formerly .aliases -----
+# ----- aliases -----
 ## Navigation
 alias ..="cd .."
 alias ...="cd ../.."
@@ -124,7 +124,7 @@ alias hdf="df -ah"
 # Kubernetes
 alias kc="kubectl"
 
-# ----- formerly .aliases -----
+# ----- aliases -----
 
 # Load all the shell dotfiles
 for file in ~/.{bash_prompt,functions,work,secrets}; do
