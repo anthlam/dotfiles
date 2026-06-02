@@ -11,7 +11,6 @@ export PSQL_EDITOR="vim -u NONE";
 export KUBE_EDITOR=$EDITOR;
 
 ## appearance
-export CLICOLOR=1;
 export LSCOLORS="ExGxbEaECxxEhEhBaDaCaD";
 ### Support colors in less
 export LESS_TERMCAP_mb=$(tput bold; tput setaf 93);
@@ -94,8 +93,8 @@ alias ~="cd ~"
 alias -- -="cd -"
 
 ## File management
-alias la="ls -alhFGT"       # ls all, long format, human-readable size, type identifiers, colorized, complete time
-alias lats="ls -alhtrFGT"     # la sorted by increasing time modified
+alias la="ls -alhT"       # ls all, long format, human-readable size, type identifiers, colorized, complete time
+alias lats="ls -alhtrT"     # la sorted by increasing time modified
 alias mv="mv -iv"
 alias cp="cp -Riv"
 alias mkdir="mkdir -vp"
@@ -126,6 +125,13 @@ alias kc="kubectl"
 # replacement for GREP_OPTIONS
 grep --color=auto < /dev/null &>/dev/null &&
   alias grep='grep --color=auto'
+
+# cross-platform replacement for CLICOLOR
+if ls --color=auth &>/dev/null; then
+  alias ls='ls -F --color=auto'
+else
+  alias ls='ls -F -G'
+fi
 # ----- aliases -----
 
 # Load all the shell dotfiles
