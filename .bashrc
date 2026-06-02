@@ -12,7 +12,6 @@ export KUBE_EDITOR=$EDITOR;
 
 ## appearance
 export CLICOLOR=1;
-export GREP_OPTIONS="--color=auto";
 export LSCOLORS="ExGxbEaECxxEhEhBaDaCaD";
 ### Support colors in less
 export LESS_TERMCAP_mb=$(tput bold; tput setaf 93);
@@ -124,6 +123,9 @@ alias hdf="df -ah"
 # Kubernetes
 alias kc="kubectl"
 
+# replacement for GREP_OPTIONS
+grep --color=auto < /dev/null &>/dev/null &&
+  alias grep='grep --color=auto'
 # ----- aliases -----
 
 # Load all the shell dotfiles
