@@ -27,14 +27,10 @@ export LESS_TERMCAP_ZV=$(tput rsubm);
 export LESS_TERMCAP_ZO=$(tput ssupm);
 export LESS_TERMCAP_ZW=$(tput rsupm);
 
-## Place current directory in bash title/tab
-export PROMPT_COMMAND='echo -ne "\033]0; ${PWD##*/}\007"';
-
-## share bash history across sessions/tabs
+## bash history
 export HISTSIZE=25000;
 export HISTFILESIZE=10000;
 export HISTCONTROL=ignoredups:erasedups;
-export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND";
 
 ## nvm
 export NVM_DIR=~/.nvm;
@@ -200,7 +196,7 @@ prompt_branch_icon() {
 
 ## Build the git portion of the prompt
 prompt_git() {
-  echo -n " \$(prompt_branch_icon)\$(parse_git_branch)\$(parse_git_dirty)"
+  echo -n " $(prompt_branch_icon)$(parse_git_branch)$(parse_git_dirty)"
 }
 
 ## Put current time in 12 hour format at beginning of prompt
@@ -234,14 +230,23 @@ prompt_char(){
 }
 
 build_prompt() {
-  prompt_timestamp
-  prompt_context
-  prompt_cwd
-  prompt_git
-  prompt_char
+  PS1="\n"
+  PS1+=$(prompt_timestamp)
+  PS1+=$(prompt_context)
+  PS1+=$(prompt_cwd)
+  PS1+=$(prompt_git)
+  PS1+=$(prompt_char)
 }
 
-PS1="${RESET}\n$(build_prompt)"
+## Place current directory in bash title/tab
+PROMPT_COMMAND='echo -ne "\033]0; ${PWD##*/}\007"'
+
+## share history between shell sessions
+PROMPT_COMMAND="history -a; history -c; history -r; ${PROMPT_COMMAND:+$PROMPT_COMMAND}"
+
+## build_prompt should always be the first PROMPT_COMMAND
+PROMPT_COMMAND="build_prompt; ${PROMPT_COMMAND:+$PROMPT_COMMAND}"
+
 PS2="${MORE_PROMPT} "
 # ----- PROMPT -----
 
