@@ -246,8 +246,83 @@ PROMPT_DIRTRIM=3
 PS2="${MORE_PROMPT} "
 # ----- PROMPT -----
 
-# Load all the shell dotfiles
-for file in ~/.{functions,work,secrets}; do
+# ----- FUNCTIONS -----
+## Display colors
+colortest() {
+  for i in {0..255}; do
+    echo " $i:  $(tput setaf $i)This is a test$(tput sgr0) $(tput setab $i)This is a test$(tput sgr0)";
+  done;
+}
+
+## Print PATH in easier to read format
+mypath() {
+  echo -e ${PATH//:/\\n}
+}
+
+## Grep for a process
+psg() {
+  ps aux | grep $@
+}
+
+## Run some command N times
+runn() {
+  if [ $# -lt 2 ]
+  then
+    echo "2 arguments required: (1) Number of times you want to run the command, (2) The \
+command to run"
+    return
+  fi
+  for ((i=1;i<=$1;i++)); do $2; done
+}
+
+## Attach tmux session
+ta() {
+  tmux a -t $@
+}
+
+## New tmux session
+tn() {
+  [[ -z "$2" ]] && WORKING_DIR=~ || WORKING_DIR=$2
+  tmux new -s $1 -c $WORKING_DIR
+}
+
+## open buffer output in vim
+v() {
+  $@ | vim -R -
+}
+
+## encrypted zip
+ezip() {
+  zip -er $1 $2 -x *.DS_Store
+}
+
+## fzf completion function for git
+_fzf_complete_git() {
+  _fzf_complete -- "$@" < <(
+    git --help -a | grep -E '^\s+' | awk '{print $1}'
+  )
+}
+
+## custom fzf completion for certain commands
+_fzf_comprun() {
+  local command=$1
+  shift
+
+  case "$command" in
+    tree)         find . -type d | fzf --preview 'tree -C {}' "$@" ;;
+    *)            fzf "$@" ;;
+  esac
+}
+
+## Update .brewfile with currently installed packages
+brewup() {
+  brew bundle dump --file="${HOME}/.brewfile" --force
+  echo "Updated .brewfile with currently installed packages"
+}
+# ----- FUNCTIONS -----
+
+# Load shell dotfiles that should always be local only
+for file in ~/.{work,secrets}; do
   [ -r "$file" ] && . "$file"
 done;
 unset file;
