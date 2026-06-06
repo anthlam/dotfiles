@@ -170,10 +170,10 @@ parse_git_dirty() {
     local unstaged_count="$(grep -Ec '^.[^ ?#] .+' <<< "${status}")"
     local staged_count="$(grep -Ec '^[^ ?#]. .+' <<< "${status}")"
 
-    [[ "${staged_count}" -gt 0 ]] && details+=" ${RESET}${BOLD}${GREEN}${GIT_STAGED}${staged_count}"
-    [[ "${unstaged_count}" -gt 0 ]] && details+=" ${RESET}${BOLD}${YELLOW}${GIT_UNSTAGED}${unstaged_count}"
-    [[ "${untracked_count}" -gt 0 ]] && details+=" ${RESET}${BOLD}${RED}${GIT_UNTRACKED}${untracked_count}"
-    [[ "${staged_count}" -eq 0 ]] && [[ "${unstaged_count}" -eq 0 ]] && [[ "${untracked_count}" -eq 0 ]] && details+=" ${RESET}${BOLD}${GREEN}${GIT_CLEAN}"
+    [[ "${staged_count}" -gt 0 ]] && details+=" \[${RESET}\]\[${BOLD}\]\[${GREEN}\]\[${GIT_STAGED}\]${staged_count}"
+    [[ "${unstaged_count}" -gt 0 ]] && details+=" \[${RESET}\]\[${BOLD}\]\[${YELLOW}\]\[${GIT_UNSTAGED}\]${unstaged_count}"
+    [[ "${untracked_count}" -gt 0 ]] && details+=" \[${RESET}\]\[${BOLD}\]\[${RED}\]\[${GIT_UNTRACKED}\]${untracked_count}"
+    [[ "${staged_count}" -eq 0 ]] && [[ "${unstaged_count}" -eq 0 ]] && [[ "${untracked_count}" -eq 0 ]] && details+=" \[${RESET}\]\[${BOLD}\]\[${GREEN}\]${GIT_CLEAN}"
   fi
 
   if [[ -n "${details}" ]]; then
@@ -184,13 +184,13 @@ parse_git_dirty() {
 ## Get the current git branch
 parse_git_branch() {
   local branch=$(git rev-parse --abbrev-ref HEAD 2> /dev/null)
-  echo -n "${RESET}${BOLD}${MAGENTA}${branch}"
+  echo -n "\[${RESET}\]\[${BOLD}\]\[${MAGENTA}\]${branch}"
 }
 
 ## Build the git branch portion of the prompt
 prompt_branch_icon() {
   if [[ -n "$(git branch --no-color 2> /dev/null)" ]]; then
-    echo -n "${RESET}${BOLD}${MAGENTA}${GIT_BRANCH}"
+    echo -n "\[${RESET}\]\[${BOLD}\]\[${MAGENTA}\]${GIT_BRANCH}"
   fi
 }
 
@@ -201,16 +201,16 @@ prompt_git() {
 
 ## Put current time in 12 hour format at beginning of prompt
 prompt_timestamp() {
-  echo -n "${RESET}${BOLD}${ORANGE}\t"
+  echo -n "\[${RESET}\]\[${BOLD}\]\[${ORANGE}\]\t"
 }
 
 ## Build user and host portion of the prompt
 prompt_context() {
-  local left_sq_bracket="${RESET}${BOLD}${GREEN}["
-  local right_sq_bracket="${RESET}${BOLD}${GREEN}]"
-  local at_symbol="${RESET}${BOLD}${PINK}@"
-  local user_name="${RESET}${BOLD}${PURPLE}\u"
-  local host_name="${RESET}${BOLD}${BLUE}\H"
+  local left_sq_bracket="\[${RESET}\]\[${BOLD}\]\[${GREEN}\]["
+  local right_sq_bracket="\[${RESET}\]\[${BOLD}\]\[${GREEN}\]]"
+  local at_symbol="\[${RESET}\]\[${BOLD}\]\[${PINK}\]@"
+  local user_name="\[${RESET}\]\[${BOLD}\]\[${PURPLE}\]\u"
+  local host_name="\[${RESET}\]\[${BOLD}\]\[${BLUE}\]\H"
 
   if [[ -n ${SSH_CLIENT} ]]; then
     echo -n " ${left_sq_bracket}${user_name}${at_symbol}${host_name}${right_sq_bracket}"
@@ -221,12 +221,12 @@ prompt_context() {
 
 ## Build current working directory portion of the prompt
 prompt_cwd() {
-  echo -n " ${RESET}${BOLD}${CYAN}\w"
+  echo -n " \[${RESET}\]\[${BOLD}\]\[${CYAN}\]\w"
 }
 
 ## Add prompt character
 prompt_char(){
-  echo -n "${RESET}\n${PROMPT} "
+  echo -n "\[${RESET}\]\n${PROMPT} "
 }
 
 build_prompt() {
