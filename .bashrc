@@ -3,7 +3,7 @@
 # Ignore all of this if bash is running non-interactively (like when a script is run)
 [[ -n $PS1 ]] || return
 
-# ----- environment -----
+# ----- ENVIRONMENT -----
 ## default editor
 export EDITOR=nvim;
 export VISUAL=$EDITOR;
@@ -50,7 +50,7 @@ if type rg &> /dev/null; then
   export FZF_DEFAULT_OPTS='-m --color="dark,fg:6"'
   export FZF_COMPLETION_DIR_COMMANDS="cd pushd rmdir tree"
 fi
-# ----- environment -----
+# ----- ENVIRONMENT -----
 
 # ----- PATH -----
 ## reset path
@@ -68,7 +68,7 @@ GO_BIN="$(go env GOPATH)/bin"
 PATH="$(brew --prefix)/Cellar:/usr/local/sbin:$HOME/.local/bin:$BREW_PYTHON_HOME:$GO_BIN:$RVM_HOME:$PATH"
 # ----- PATH -----
 
-# ----- shell options -----
+# ----- SHELL OPTIONS -----
 ## Append to bash history instead of overwriting
 shopt -s histappend;
 
@@ -83,9 +83,9 @@ shopt -s checkwinsize;
 ## globbing changes
 shopt -s nocaseglob;
 shopt -s extglob
-# ----- shell options -----
+# ----- SHELL OPTIONS -----
 
-# ----- aliases -----
+# ----- ALIASES -----
 ## Navigation
 alias ..="cd .."
 alias ...="cd ../.."
@@ -132,7 +132,7 @@ if ls --color=auth &>/dev/null; then
 else
   alias ls='ls -F -G'
 fi
-# ----- aliases -----
+# ----- ALIASES -----
 
 # Load all the shell dotfiles
 for file in ~/.{bash_prompt,functions,work,secrets}; do
