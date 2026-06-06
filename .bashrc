@@ -241,6 +241,8 @@ PROMPT_COMMAND="history -a; history -c; history -r; ${PROMPT_COMMAND:+$PROMPT_CO
 ## build_prompt should always be the first PROMPT_COMMAND
 PROMPT_COMMAND="build_prompt; ${PROMPT_COMMAND:+$PROMPT_COMMAND}"
 
+PROMPT_DIRTRIM=3
+
 PS2="${MORE_PROMPT} "
 # ----- PROMPT -----
 
