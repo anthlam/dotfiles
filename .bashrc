@@ -248,10 +248,12 @@ PS2="${MORE_PROMPT} "
 
 # ----- FUNCTIONS -----
 ## Display colors
-colortest() {
+colors() {
+  local i
   for i in {0..255}; do
-    echo " $i:  $(tput setaf $i)This is a test$(tput sgr0) $(tput setab $i)This is a test$(tput sgr0)";
-  done;
+    printf "\x1b[38;5;${i}mcolor %d\n" "$i"
+  done
+  tput sgr0
 }
 
 ## Print PATH in easier to read format
