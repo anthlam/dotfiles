@@ -170,9 +170,9 @@ parse_git_dirty() {
   local status=$(git status -b --porcelain 2> /dev/null || git status --porcelain 2> /dev/null)
 
   if [[ -n "${status}" ]]; then
-    local untracked_count="$(egrep -c '^\?\? .+' <<< "${status}")"
-    local unstaged_count="$(egrep -c '^.[^ ?#] .+' <<< "${status}")"
-    local staged_count="$(egrep -c '^[^ ?#]. .+' <<< "${status}")"
+    local untracked_count="$(grep -Ec '^\?\? .+' <<< "${status}")"
+    local unstaged_count="$(grep -Ec '^.[^ ?#] .+' <<< "${status}")"
+    local staged_count="$(grep -Ec '^[^ ?#]. .+' <<< "${status}")"
 
     [[ "${staged_count}" -gt 0 ]] && details+=" ${RESET}${BOLD}${GREEN}${GIT_STAGED}${staged_count}"
     [[ "${unstaged_count}" -gt 0 ]] && details+=" ${RESET}${BOLD}${YELLOW}${GIT_UNSTAGED}${unstaged_count}"
