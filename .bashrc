@@ -183,20 +183,14 @@ parse_git_dirty() {
 
 ## Get the current git branch
 parse_git_branch() {
-  local branch=$(git rev-parse --abbrev-ref HEAD 2> /dev/null)
-  echo -n "\[${RESET}\]\[${BOLD}\]\[${MAGENTA}\]${branch}"
-}
-
-## Build the git branch portion of the prompt
-prompt_branch_icon() {
-  if [[ -n "$(git branch --no-color 2> /dev/null)" ]]; then
-    echo -n "\[${RESET}\]\[${BOLD}\]\[${MAGENTA}\]${GIT_BRANCH}"
-  fi
+  local branch
+  branch=$(git rev-parse --abbrev-ref HEAD 2> /dev/null)
+  [[ -n $branch ]] && echo -n "\[${RESET}\]\[${BOLD}\]\[${MAGENTA}\]${GIT_BRANCH} ${branch}"
 }
 
 ## Build the git portion of the prompt
 prompt_git() {
-  echo -n " $(prompt_branch_icon)$(parse_git_branch)$(parse_git_dirty)"
+  echo -n " $(parse_git_branch)$(parse_git_dirty)"
 }
 
 ## Put current time in 12 hour format at beginning of prompt
