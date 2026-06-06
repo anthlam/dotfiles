@@ -222,22 +222,22 @@ prompt_context() {
   fi
 }
 
-## Build the directory portion of the prompt
-prompt_dir() {
+## Build current working directory portion of the prompt
+prompt_cwd() {
   echo -n " ${RESET}${BOLD}${CYAN}\w"
 }
 
-## End the prompt
-prompt_end(){
+## Add prompt character
+prompt_char(){
   echo -n "${RESET}\n${PROMPT} "
 }
 
 build_prompt() {
   prompt_timestamp
   prompt_context
-  prompt_dir
+  prompt_cwd
   prompt_git
-  prompt_end
+  prompt_char
 }
 
 export PS1="${RESET}\n$(build_prompt)"
