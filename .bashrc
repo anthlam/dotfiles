@@ -166,6 +166,7 @@ RESET=$(tput sgr0)
 
 ## Build git file changes portion on dirty git repos
 parse_git_dirty() {
+  local details=''
   local status=$(git status -b --porcelain 2> /dev/null || git status --porcelain 2> /dev/null)
 
   if [[ -n "${status}" ]]; then
