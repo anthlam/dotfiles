@@ -247,6 +247,12 @@ PS2="${MORE_PROMPT} "
 # ----- PROMPT -----
 
 # ----- FUNCTIONS -----
+## Update .brewfile with currently installed packages
+brewup() {
+  brew bundle dump --file="${HOME}/.brewfile" --force
+  echo "Updated .brewfile with currently installed packages"
+}
+
 ## Display colors
 colors() {
   local i
@@ -254,6 +260,17 @@ colors() {
     printf "\x1b[38;5;${i}mcolor %d\n" "$i"
   done
   tput sgr0
+}
+
+# Convert epoch to human readable (print current date if no args)
+epoch() {
+	local num=${1:--1}
+	printf '%(%B %d, %Y %-I:%M:%S %p %Z)T\n' "$num"
+}
+
+## encrypted zip
+ezip() {
+  zip -er $1 $2 -x *.DS_Store
 }
 
 ## Print PATH in easier to read format
@@ -293,11 +310,6 @@ v() {
   $@ | vim -R -
 }
 
-## encrypted zip
-ezip() {
-  zip -er $1 $2 -x *.DS_Store
-}
-
 ## fzf completion function for git
 _fzf_complete_git() {
   _fzf_complete -- "$@" < <(
@@ -314,12 +326,6 @@ _fzf_comprun() {
     tree)         find . -type d | fzf --preview 'tree -C {}' "$@" ;;
     *)            fzf "$@" ;;
   esac
-}
-
-## Update .brewfile with currently installed packages
-brewup() {
-  brew bundle dump --file="${HOME}/.brewfile" --force
-  echo "Updated .brewfile with currently installed packages"
 }
 # ----- FUNCTIONS -----
 
