@@ -119,14 +119,14 @@ alias tk="tmux kill-server"
 alias hdu1="du -hd1 | sort -rh"
 alias hdf="df -ah"
 
-# Kubernetes
+## Kubernetes
 alias kc="kubectl"
 
-# replacement for GREP_OPTIONS
+## replacement for GREP_OPTIONS
 grep --color=auto < /dev/null &>/dev/null &&
   alias grep='grep --color=auto'
 
-# cross-platform replacement for CLICOLOR
+## cross-platform color support for ls (replaces CLICOLOR)
 if ls --color=auth &>/dev/null; then
   alias ls='ls -F --color=auto'
 else
