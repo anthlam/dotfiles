@@ -241,8 +241,8 @@ build_prompt() {
   prompt_char
 }
 
-export PS1="${RESET}\n$(build_prompt)"
-export PS2="${MORE_PROMPT} "
+PS1="${RESET}\n$(build_prompt)"
+PS2="${MORE_PROMPT} "
 # ----- PROMPT -----
 
 # Load all the shell dotfiles
