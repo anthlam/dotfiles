@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# .bashrc.local - Local bash configuration that shouldn't get committed
+#
+# This file is loaded by .bashrc and should contain any configuration that is
+# specific to a particular machine and shouldn't be committed. Like your work
+# computer.
+#
+# SETUP:
+# 1. Copy this file to ~/.bashrc.local (it will be sourced from there, not symlinked)
+# 2. Add local configuration
+#
+# Use this to keep the same dotfiles repo for any machine, while being able to
+# custom each machine that uses them.

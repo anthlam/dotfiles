@@ -329,12 +329,6 @@ _fzf_comprun() {
 }
 # ----- FUNCTIONS -----
 
-# Load shell dotfiles that should always be local only
-for file in ~/.{work,secrets}; do
-  [ -r "$file" ] && . "$file"
-done;
-unset file;
-
 # Enable Homebrew bash completion
 [[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]] && . "$(brew --prefix)/etc/profile.d/bash_completion.sh"
 
@@ -350,4 +344,9 @@ command -v fzf >/dev/null 2>&1 && eval "$(fzf --bash)"
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
-# ----- EVERYTHING BELOW HERE WAS AUTOMATICALLY ADDED, PROBABLY BY SOME STUPID WORK BULLSHIT -----
+# load local configuration
+[ -r "$HOME/.bashrc.local" ] && . "$HOME/.bashrc.local"
+
+# ----- EVERYTHING BELOW HERE WAS AUTOMATICALLY ADDED -----
+# ----- PROBABLY BY SOME STUPID WORK BULLSHIT -----
+# ----- MOVE IT TO .bashrc.local -----
