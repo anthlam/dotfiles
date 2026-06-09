@@ -1,0 +1,12 @@
+# Theme
+theme = Cobalt2
+
+# Font
+font-family = Fira Code Regular
+font-size = 15
+font-thicken = true
+
+# Cursor
+cursor-style = block
+cursor-style-blink = true
+mouse-hide-while-typing = true
