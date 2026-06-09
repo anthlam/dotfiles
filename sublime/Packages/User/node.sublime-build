@@ -1,9 +1,0 @@
-{
-  "cmd": [
-    "/Users/anthlam/.nvm/versions/node/v0.12.2/bin/node",
-    "$file",
-    "$file_base_name"
-  ],
-  "working_dir": "${project_path:${folder}}",
-  "selector": "source.js"
-}

@@ -1,8 +1,0 @@
-{
-  "parser": "github",
-  "build_action": "browser",
-
-  // Putting this here to make switching between document and comment
-  // style markdowns easier.  See default settings file for more info.
-  "github_mode": "markdown"
-}
