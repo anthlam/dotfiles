@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-# TODO cleanup and get rid of some of the macos default stuff
 # TODO change file names to non-dot versions and update symlink loop
 # TODO checkout alternatives to this install script, like using a Makefile
 
@@ -131,8 +130,8 @@ echo "node --version: $(node --version)"
 echo "npm --version: $(npm --version)"
 read -n1 -rsp $"Review output so far to see if it is safe to continue. macos configuration happens next. Press enter to continue or Ctrl+C to quit\n" key
 
-
-echo -e "\nUI/UX Settings"
+echo -e "\nModifying NSUserDefaults"
+echo "UI/UX Settings"
 ###############################################################################
 # General UI/UX                                                               #
 ###############################################################################
@@ -244,9 +243,6 @@ defaults write com.apple.screencapture type -string "png"
 echo "make fonts look better on non-retina displays"
 defaults write NSGlobalDomain AppleFontSmoothing -int 1
 
-# Enable HiDPI display modes (requires restart)
-# sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
-
 read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" key
 echo -e "\nFinder Settings"
 ###############################################################################
@@ -260,13 +256,7 @@ defaults write com.apple.finder DisableAllAnimations -bool true
 # Show icons for hard drives, servers, and removable media on the desktop
 echo "show external/network volumes on desktop"
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
-# defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
-# defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
 defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
-
-# Finder: show all filename extensions
-# echo "display file extensions"
-# defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 
 # Finder: show status bar
 echo "show finder status bar"
@@ -377,103 +367,6 @@ echo "do not show recent apps in dock"
 defaults write com.apple.dock show-recents -bool false
 
 read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" key
-echo -e "\nSafari/Webkit Settings"
-###############################################################################
-# Safari & WebKit                                                             #
-###############################################################################
-
-# Press Tab to highlight each item on a web page
-#echo "tab can highlight each item on a web page"
-#defaults write com.apple.Safari WebKitTabToLinksPreferenceKey -bool true
-#defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2TabsToLinks -bool true
-
-# Allow hitting the Backspace key to go to the previous page in history
-#echo "backspace goes back to previous page"
-#defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2BackspaceKeyNavigationEnabled -bool true
-
-# Enable Safari’s debug menu
-echo "enable debug menu"
-defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
-
-# Make Safari’s search banners default to Contains instead of Starts With
-echo "change search banners to Contains"
-defaults write com.apple.Safari FindOnPageMatchesWordStartsOnly -bool false
-
-# Enable the Develop menu and the Web Inspector in Safari
-echo "enable develop menu and web inspector"
-defaults write com.apple.Safari IncludeDevelopMenu -bool true
-defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
-
-# Add a context menu item for showing the Web Inspector in web views
-echo "enable Web Inspector context menu item"
-defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
-
-# Enable continuous spellchecking
-echo "enable continuous spellchecking"
-defaults write com.apple.Safari WebContinuousSpellCheckingEnabled -bool true
-
-# Disable auto-correct
-echo "disable auto-correct"
-defaults write com.apple.Safari WebAutomaticSpellingCorrectionEnabled -bool false
-
-# Disable AutoFill
-echo "disable auto-fill"
-defaults write com.apple.Safari AutoFillFromAddressBook -bool false
-defaults write com.apple.Safari AutoFillPasswords -bool false
-defaults write com.apple.Safari AutoFillCreditCardData -bool false
-defaults write com.apple.Safari AutoFillMiscellaneousForms -bool false
-
-# Warn about fraudulent websites
-echo "warn about fraudulent websites"
-defaults write com.apple.Safari WarnAboutFraudulentWebsites -bool true
-
-# Disable plug-ins
-echo "disable plugins"
-defaults write com.apple.Safari WebKitPluginsEnabled -bool false
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2PluginsEnabled -bool false
-
-# Disable Java
-echo "disable java"
-#defaults write com.apple.Safari WebKitJavaEnabled -bool false
-#defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabled -bool false
-#defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabledForLocalFiles -bool false
-
-# Block pop-up windows
-echo "block pop-ups"
-defaults write com.apple.Safari WebKitJavaScriptCanOpenWindowsAutomatically -bool false
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptCanOpenWindowsAutomatically -bool false
-
-# Disable auto-playing video
-echo "disable auto-playing video"
-defaults write com.apple.Safari WebKitMediaPlaybackAllowsInline -bool false
-defaults write com.apple.SafariTechnologyPreview WebKitMediaPlaybackAllowsInline -bool false
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2AllowsInlineMediaPlayback -bool false
-defaults write com.apple.SafariTechnologyPreview com.apple.Safari.ContentPageGroupIdentifier.WebKit2AllowsInlineMediaPlayback -bool false
-
-# Enable “Do Not Track”
-echo "enable 'Do Not Track'"
-defaults write com.apple.Safari SendDoNotTrackHTTPHeader -bool true
-
-# Update extensions automatically
-echo "automatic extension updates"
-defaults write com.apple.Safari InstallExtensionUpdatesAutomatically -bool true
-
-read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" key
-echo -e "\nMail Settings"
-###############################################################################
-# Mail                                                                        #
-###############################################################################
-
-# Copy email addresses as `foo@example.com` instead of `Foo Bar <foo@example.com>` in Mail.app
-#echo "change email address copy behavior"
-#defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
-
-# Display emails in threaded mode, sorted by date (oldest at the top)
-echo "display emails in threaded mode"
-defaults write com.apple.mail DraftsViewerAttributes -dict-add "DisplayInThreadedMode" -string "yes"
-
-read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" key
 echo -e "\nTerminal & iTerm Settings"
 ###############################################################################
 # Terminal & iTerm 2                                                          #
@@ -516,33 +409,11 @@ defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
 defaults write com.apple.ActivityMonitor SortDirection -int 0
 
 read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" key
-echo -e "\nUtility Settings"
-###############################################################################
-# Address Book, Dashboard, iCal, TextEdit, and Disk Utility                   #
-###############################################################################
-
-# Use plain text mode for new TextEdit documents
-echo "open new TextEdit docs in plain text mode"
-defaults write com.apple.TextEdit RichText -int 0
-# Open and save files as UTF-8 in TextEdit
-echo "use UTF-8 in TextEdit"
-defaults write com.apple.TextEdit PlainTextEncoding -int 4
-defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
-
-read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" key
 echo -e "\nApp Store Settings"
 ###############################################################################
 # Mac App Store                                                               #
 ###############################################################################
-
-# Enable the WebKit Developer Tools in the Mac App Store
-echo "enable webkit dev tools"
-defaults write com.apple.appstore WebKitDeveloperExtras -bool true
-
-# Enable Debug Menu in the Mac App Store
-echo "enable debug menu"
-defaults write com.apple.appstore ShowDebugMenu -bool true
-
+#
 # Enable the automatic update check
 echo "enable automatic update check"
 defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
@@ -564,20 +435,6 @@ defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1
 #defaults write com.apple.commerce AutoUpdateRestartRequired -bool false
 
 read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" key
-echo -e "\nMessages Settings"
-###############################################################################
-# Messages                                                                    #
-###############################################################################
-
-# Disable smart quotes as it’s annoying for messages that contain code
-#echo "disable smart quotes"
-#defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "automaticQuoteSubstitutionEnabled" -bool false
-
-# Disable continuous spell checking
-#echo "disable continuous spell check"
-#defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "continuousSpellCheckingEnabled" -bool false
-
-read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" key
 echo -e "\nGoogle Chrome Settings"
 ###############################################################################
 # Google Chrome & Google Chrome Canary                                        #
@@ -595,23 +452,12 @@ echo -e "\nKilling Affected Applications"
 ###############################################################################
 
 for app in "Activity Monitor" \
-	"Address Book" \
-	"Calendar" \
 	"cfprefsd" \
-	"Contacts" \
 	"Dock" \
 	"Finder" \
 	"Google Chrome Canary" \
 	"Google Chrome" \
-	"Mail" \
-	"Messages" \
-	"Photos" \
-	"Safari" \
-	"Spectacle" \
-	"SystemUIServer" \
-	"Terminal" \
-	"Transmission" \
-	"iCal"; do
+	"Terminal"; do
 	killall "${app}" &> /dev/null
 done
 echo "Done. Note that some of these changes require a logout/restart to take effect."
