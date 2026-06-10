@@ -1,13 +1,13 @@
+#!/usr/bin/env bash
+
 # TODO cleanup and get rid of some of the macos default stuff
 # TODO change file names to non-dot versions and update symlink loop
 # TODO checkout alternatives to this install script, like using a Makefile
 
-#!/usr/bin/env bash
 
-# ~/.macos — https://mths.be/macos
-# Modified by Anthony Lamorte with lots of "inspiration" from Kent C. Dodds
+# ~/install
 # Run without downloading:
-# curl https://raw.githubusercontent.com/anthlam/dotfiles/master/.macos | bash
+# curl -fsSL https://raw.githubusercontent.com/anthlam/dotfiles/master/install | bash
 
 # Close any open System Preferences panes, to prevent them from overriding
 # settings we’re about to change
@@ -16,7 +16,7 @@ osascript -e 'tell application "System Preferences" to quit'
 # Ask for the administrator password upfront
 sudo -v
 
-# Keep-alive: update existing `sudo` time stamp until `.macos` has finished
+# Keep-alive: update existing `sudo` time stamp until `install` has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 ###############################################################################
