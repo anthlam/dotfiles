@@ -1,3 +1,7 @@
+# TODO cleanup and get rid of some of the macos default stuff
+# TODO change file names to non-dot versions and update symlink loop
+# TODO checkout alternatives to this install script, like using a Makefile
+
 #!/usr/bin/env bash
 
 # ~/.macos — https://mths.be/macos
@@ -98,7 +102,6 @@ for cc in "${claude_configs[@]}"; do
   symlink "$PWD/claude/$cc" "$HOME/.claude/$cc"
 done
 
-symlink "$PWD/claude/
 echo "installing latest bash and changing shell to bash"
 brew install bash
 BREW_BASH="$(brew --prefix)/bin/bash"
@@ -110,11 +113,6 @@ echo "brew installing"
 brew bundle --file="${HOME}/.brewfile"
 read -n1 -rsp $"*** Review caveats to see if there is anything that needs to be done. Press enter to continue or Ctrl+C to quit...\n" key
 rm "${HOME}/.brewfile"
-
-echo "point neovim at .vimrc (https://neovim.io/doc/user/nvim.html#nvim-from-vim)"
-echo "set runtimepath^=~/.vim runtimepath+=~/.vim/after" > "${HOME}/.config/nvim/init.vim"
-echo "let &packpath = &runtimepath" >> "${HOME}/.config/nvim/init.vim"
-echo "source ~/.vimrc" >> "${HOME}/.config/nvim/init.vim"
 
 echo "setup fzf key bindings and fuzzy completion"
 $(brew --prefix)/opt/fzf/install
