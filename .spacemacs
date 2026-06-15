@@ -79,7 +79,7 @@ This function should only modify configuration layer settings."
           org-enable-org-journal-support t
           org-startup-indented t
           org-want-todo-bindings t
-          org-journal-dir "~/code/me/til/"
+          org-journal-dir "~/code/me/notes/"
           org-journal-file-format "%Y-%m-%d"
           org-journal-date-prefix ""
           org-journal-date-format "%A, %B %d %Y"
@@ -97,7 +97,7 @@ This function should only modify configuration layer settings."
      syntax-checking
      (terraform :variables
                 terraform-auto-format-on-save t
-                terraform-backend 'company-terraform)
+                terraform-backend 'lsp)
      themes-megapack
      toml
      (unicode-fonts :variables
@@ -782,7 +782,7 @@ This function is called at the very end of Spacemacs initialization."
                  spacemacs-theme spinner sql-indent subatomic-theme
                  subatomic256-theme sublime-themes sunny-day-theme tablist tagedit
                  tango-2-theme tango-plus-theme tangotango-theme tao-theme tern
-                 terraform-mode tide toc-org toxi-theme treepy
+                 terraform-mode tide toc-org toml-mode toxi-theme treepy
                  twilight-anti-bright-theme twilight-bright-theme twilight-theme
                  typescript-mode ujelly-theme underwater-theme undo-tree
                  use-package vi-tilde-fringe vmd-mode volatile-highlights
@@ -790,6 +790,10 @@ This function is called at the very end of Spacemacs initialization."
                  white-sand-theme window-numbering winum with-editor ws-butler
                  xterm-color yaml-mode yapfify yasnippet zen-and-art-theme
                  zenburn-theme))
+   '(safe-local-variable-values
+     '((js2-basic-offset . 2) (typescript-backend . tide) (typescript-backend . lsp)
+       (javascript-backend . tide) (javascript-backend . tern)
+       (javascript-backend . lsp)))
    '(warning-suppress-types '((emacs))))
   (custom-set-faces
    ;; custom-set-faces was added by Custom.
