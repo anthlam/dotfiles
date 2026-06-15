@@ -63,6 +63,20 @@ PATH="$(brew --prefix)/Cellar:/usr/local/sbin:$HOME/.local/bin:$BREW_PYTHON_HOME
 # ----- PATH -----
 
 # ----- SHELL OPTIONS -----
+## Append to bash history instead of overwriting
+shopt -s histappend
+
+## cd changes (autocd and dirspell require Bash >= 4)
+shopt -s cdspell
+shopt -s autocd 2>/dev/null || true
+shopt -s dirspell 2>/dev/null || true
+
+## adjusts alignment after each command
+shopt -s checkwinsize
+
+## globbing changes
+shopt -s nocaseglob
+shopt -s extglob
 # ----- SHELL OPTIONS -----
 
 # ----- ALIASES -----
@@ -92,15 +106,6 @@ unset file;
 
 # For bash completion
 # . ~/.bin/.tmuxinator.bash;
-
-# Append to bash history instead of overwriting
-shopt -s histappend;
-
-# Autocorrect typos in paths on cd command
-shopt -s cdspell;
-
-# Case-insensitive globbing
-shopt -s nocaseglob;
 
 # Need this so SSH passphrase isn't constantly asked for in tmux sessions
 ssh-add -A 2>/dev/null;
