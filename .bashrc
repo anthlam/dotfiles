@@ -80,6 +80,63 @@ shopt -s extglob
 # ----- SHELL OPTIONS -----
 
 # ----- ALIASES -----
+## Navigation
+alias ..="cd .."
+alias ...="cd ../.."
+alias ~="cd ~"
+alias -- -="cd -"
+
+## File management
+alias la="ls -alhT"       # ls all, long format, human-readable size, type identifiers, colorized, complete time
+alias lats="ls -alhtrT"     # la sorted by increasing time modified
+alias mv="mv -iv"
+alias cp="cp -Riv"
+alias mkdir="mkdir -vp"
+
+## git shortcuts
+alias gdmb="git remote prune origin | grep '] origin/' | sed 's/^.*origin\///g' | xargs -L1 -J % git branch -D %"         # Delete branches that have been deleted on the remote repository (works with squash&merge repos)
+
+## Editors
+alias space="open -a $(brew --prefix)/opt/emacs-plus/Emacs.app"
+alias updatespacemacs="cd ~/.emacs.d && git pull --rebase && cd -"
+if type nvim > /dev/null 2>&1; then
+  alias vim='nvim'
+  alias vi='nvim'
+fi
+
+## process killing/grepping
+alias pk="pkill -9 \!^"
+
+## ctags
+alias actags="rm tags; ctags --exclude=.git --exclude=vendor --exclude=node_modules --exclude=coverage --exclude=public -R .;"
+
+## reloading profile
+alias sop="source ~/.bash_profile;"
+
+## better silver searcher default
+alias ag="ag --hidden --path-to-ignore ~/.ignore"
+
+## tmux
+alias tls="tmux ls"
+alias tk="tmux kill-server"
+
+## disk usage
+alias hdu1="du -hd1 | sort -rh"
+alias hdf="df -ah"
+
+## Kubernetes
+alias kc="kubectl"
+
+## replacement for GREP_OPTIONS
+grep --color=auto < /dev/null $>/dev/null &&
+  alias grep='grep --color=auto'
+
+## cross-platform color support for ls (replaces CLICOLOR)
+if ls --color=auto &>/dev/null; then
+  alias ls='ls -F --color=auto'
+else
+  alias ls='ls -F -G'
+fi
 # ----- ALIASES -----
 
 # ----- PROMPT -----
@@ -96,7 +153,7 @@ PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 # ----- FUNCTIONS -----
 
 # Load all the shell dotfiles
-for file in ~/.{bash_prompt,aliases,functions,work,secrets}; do
+for file in ~/.{bash_prompt,functions,work,secrets}; do
   [ -r "$file" ] && . "$file"
 done;
 unset file;
