@@ -47,6 +47,19 @@ fi
 # ----- ENVIRONMENT -----
 
 # ----- PATH -----
+## reset path
+PATH="/usr/local/bin:$(getconf PATH)"
+
+## add homebrew to path
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+## stuff to add to path
+RVM_HOME=$HOME/.rvm/bin
+BREW_PYTHON_HOME=$(brew --prefix python@3)/bin
+GO_BIN="$(go env GOPATH)/bin"
+
+## set path
+PATH="$(brew --prefix)/Cellar:/usr/local/sbin:$HOME/.local/bin:$BREW_PYTHON_HOME:$GO_BIN:$RVM_HOME:$PATH"
 # ----- PATH -----
 
 # ----- SHELL OPTIONS -----
@@ -69,7 +82,7 @@ PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 # ----- FUNCTIONS -----
 
 # Load all the shell dotfiles
-for file in ~/.{path,bash_prompt,aliases,functions,work,secrets}; do
+for file in ~/.{bash_prompt,aliases,functions,work,secrets}; do
   [ -r "$file" ] && . "$file"
 done;
 unset file;
