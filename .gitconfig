@@ -66,8 +66,10 @@
 
 [grep]
   lineNumber = true
+
 [pull]
 	rebase = true
+
 [merge]
 	conflictStyle = diff3
 

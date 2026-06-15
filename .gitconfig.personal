@@ -1,5 +1,9 @@
 [user]
   email = lamorte@gmail.com
+  signingKey = ""
 
-[credential]
-  helper = osxkeychain
+[commit]
+  gpgsign = false
+
+[core]
+  sshCommand = ssh
