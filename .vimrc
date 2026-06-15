@@ -55,7 +55,7 @@ set ruler
 set colorcolumn=90
 highlight ColorColumn ctermbg=8
 set showcmd
-set cursorline
+"set cursorline
 
 " white space
 set nowrap
