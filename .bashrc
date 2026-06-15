@@ -140,6 +140,106 @@ fi
 # ----- ALIASES -----
 
 # ----- PROMPT -----
+## Requires a terminal that supports 256 colors
+## Requires a Powerline-patched font
+
+PROMPT="❱"
+MORE_PROMPT="..."
+PROMPT_SEPERATOR='|'
+PROMPT_ERROR='✘'
+PROMPT_ROOT='⚡'
+PROMPT_JOBS='⚙'
+GIT_BRANCH=''
+GIT_CLEAN='✔'
+GIT_STAGED='●'
+GIT_UNSTAGED='Δ'
+GIT_UNTRACKED='✚'
+
+BLACK=$(tput setaf 0)
+RED=$(tput setaf 160)
+GREEN=$(tput setaf 2)
+YELLOW=$(tput setaf 11)
+ORANGE=$(tput setaf 208)
+BLUE=$(tput setaf 27)
+PURPLE=$(tput setaf 93)
+MAGENTA=$(tput setaf 126)
+CYAN=$(tput setaf 6)
+WHITE=$(tput setaf 7)
+PINK=$(tput setaf 207)
+BOLD=$(tput bold)
+RESET=$(tput sgr0)
+
+## Build git file changes portion on dirty git repos
+parse_git_dirty() {
+  local details=''
+  local status=$(git status -b --porcelain 2> /dev/null || git status --porcelain 2> /dev/null)
+
+  if [[ -n "${status}" ]]; then
+    local untracked_count="$(grep -Ec '^\?\? .+' <<< "${status}")"
+    local unstaged_count="$(grep -Ec '^.[^ ?#] .+' <<< "${status}")"
+    local staged_count="$(grep -Ec '^[^ ?#]. .+' <<< "${status}")"
+
+    [[ "${staged_count}" -gt 0 ]] && details+=" \[${RESET}\]\[${BOLD}\]\[${GREEN}\]${GIT_STAGED}${staged_count}"
+    [[ "${unstaged_count}" -gt 0 ]] && details+=" \[${RESET}\]\[${BOLD}\]\[${YELLOW}\]${GIT_UNSTAGED}${unstaged_count}"
+    [[ "${untracked_count}" -gt 0 ]] && details+=" \[${RESET}\]\[${BOLD}\]\[${RED}\]${GIT_UNTRACKED}${untracked_count}"
+    [[ "${staged_count}" -eq 0 ]] && [[ "${unstaged_count}" -eq 0 ]] && [[ "${untracked_count}" -eq 0 ]] && details+=" \[${RESET}\]\[${BOLD}\]\[${GREEN}\]${GIT_CLEAN}"
+  fi
+
+  if [[ -n "${details}" ]]; then
+    echo -n "${details}"
+  fi
+}
+
+## Get the current git branch
+parse_git_branch() {
+  local branch
+  branch=$(git rev-parse --abbrev-ref HEAD 2> /dev/null)
+  [[ -n $branch ]] && echo -n "\[${RESET}\]\[${BOLD}\]\[${MAGENTA}\]${GIT_BRANCH} ${branch}"
+}
+
+## Build the git portion of the prompt
+prompt_git() {
+  echo -n " $(parse_git_branch)$(parse_git_dirty)"
+}
+
+## Put current time in 12 hour format at beginning of prompt
+prompt_timestamp() {
+  echo -n "\[${RESET}\]\[${BOLD}\]\[${ORANGE}\]\t"
+}
+
+## Build user and host portion of the prompt
+prompt_context() {
+  local left_sq_bracket="\[${RESET}\]\[${BOLD}\]\[${GREEN}\]["
+  local right_sq_bracket="\[${RESET}\]\[${BOLD}\]\[${GREEN}\]]"
+  local at_symbol="\[${RESET}\]\[${BOLD}\]\[${PINK}\]@"
+  local user_name="\[${RESET}\]\[${BOLD}\]\[${PURPLE}\]\u"
+  local host_name="\[${RESET}\]\[${BOLD}\]\[${BLUE}\]\H"
+
+  if [[ -n ${SSH_CLIENT} ]]; then
+    echo -n " ${left_sq_bracket}${user_name}${at_symbol}${host_name}${right_sq_bracket}"
+  else
+    echo -n " ${left_sq_bracket}${user_name}${right_sq_bracket}"
+  fi
+}
+
+## Build the directory portion of the prompt
+prompt_cwd() {
+  echo -n " \[${RESET}\]\[${BOLD}\]\[${CYAN}\]\w"
+}
+
+# End the prompt
+prompt_char(){
+  echo -n "\[${RESET}\]\n${PROMPT} "
+}
+
+build_prompt() {
+  PS1="\n"
+  PS1+=$(prompt_timestamp)
+  PS1+=$(prompt_context)
+  PS1+=$(prompt_cwd)
+  PS1+=$(prompt_git)
+  PS1+=$(prompt_char)
+}
 
 ## Place current directory in bash title/tab
 PROMPT_COMMAND='echo -ne "\033]0; ${PWD##*/}\007"'
@@ -147,13 +247,19 @@ PROMPT_COMMAND='echo -ne "\033]0; ${PWD##*/}\007"'
 ## share history between shell sessions
 PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
+## build_prompt should always be the first PROMPT_COMMAND
+PROMPT_COMMAND="build_prompt; ${PROMPT_COMMAND:+$PROMPT_COMMAND}"
+
+PROMPT_DIRTRIM=3
+
+PS2="${MORE_PROMPT} "
 # ----- PROMPT -----
 
 # ----- FUNCTIONS -----
 # ----- FUNCTIONS -----
 
 # Load all the shell dotfiles
-for file in ~/.{bash_prompt,functions,work,secrets}; do
+for file in ~/.{functions,work,secrets}; do
   [ -r "$file" ] && . "$file"
 done;
 unset file;
