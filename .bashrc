@@ -336,23 +336,11 @@ _fzf_comprun() {
 }
 # ----- FUNCTIONS -----
 
-# Load all the shell dotfiles
-for file in ~/.{work,secrets}; do
-  [ -r "$file" ] && . "$file"
-done;
-unset file;
-
 # Enable Homebrew bash completion
 [[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]] && . "$(brew --prefix)/etc/profile.d/bash_completion.sh"
 
-# For bash completion
-# . ~/.bin/.tmuxinator.bash;
-
 # Need this so SSH passphrase isn't constantly asked for in tmux sessions
 ssh-add -A 2>/dev/null;
-
-# For nvm installed via homebrew
-# . $(brew --prefix nvm)/nvm.sh;
 
 command -v fzf >/dev/null 2>&1 && eval "$(fzf --bash)"
 [ -n "$BASH" ] && complete -F _fzf_complete_git -o default -o bashdefault git
@@ -362,5 +350,8 @@ command -v fzf >/dev/null 2>&1 && eval "$(fzf --bash)"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+# load local configuration
+[ -r "$HOME/.bashrc.local" ] && . "$HOME/.bashrc.local"
 
 # ----- EVERYTHING BELOW THIS LINE WAS AUTOMATICALLY ADDED AND SHOULD BE MOVED TO .bashrc.local -----
