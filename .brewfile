@@ -1,7 +1,6 @@
-tap "homebrew/bundle"
-tap "homebrew/cask"
-tap "homebrew/core"
 tap "d12frosted/emacs-plus"
+tap "homebrew/bundle"
+tap "homebrew/services"
 tap "mongodb/brew"
 tap "hashicorp/tap"
 
@@ -16,6 +15,7 @@ brew "bat"
 brew "shellcheck"
 brew "tree"
 brew "fd"
+cask "ghostty"
 
 # search
 brew "ripgrep"
@@ -31,7 +31,7 @@ brew "libvterm" # prereq for vterm/emacs
 brew "sqlite" # prereq for magit/emacs
 brew "aspell" # prereq for flyspell/emacs
 brew "gnu-tar" # prereq for emacs
-brew "emacs-plus", args: ["with-spacemacs-icon"]
+brew "d12frosted/emacs-plus/emacs-plus@30", args: ["with-spacemacs-icon"]
 brew "yamllint"
 
 # productivity
@@ -54,6 +54,7 @@ brew "httpie"
 
 # fonts
 cask "font-fira-code"
+cask "font-fira-code-nerd-font"
 
 # mac app store apps
 mas "Xcode", id: 497799835
