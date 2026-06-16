@@ -256,10 +256,88 @@ PS2="${MORE_PROMPT} "
 # ----- PROMPT -----
 
 # ----- FUNCTIONS -----
+## Update .brewfile with currently installed packages
+brewup() {
+  brew bundle dump --file="${HOME}/.brewfile" --force
+  echo "Updated .brewfile with currently installed packages"
+}
+
+## Display colors
+colors() {
+  for i in {0..255}; do
+    echo " $i:  $(tput setaf $i)This is a test$(tput sgr0) $(tput setab $i)This is a test$(tput sgr0)";
+  done;
+}
+
+## Convert epoch to human readable (print current date if no args)
+epoch() {
+  local num=${1:--1}
+  printf '%(%B %d, %Y %-I:%M:%S %p %Z)T\n' "$num"
+}
+
+## encrypted zip
+ezip() {
+  zip -er $1 $2 -x *.DS_Store
+}
+
+## Print PATH in easier to read format
+mypath() {
+  echo -e ${PATH//:/\\n}
+}
+
+## Grep for a process
+psg() {
+  ps aux | grep $@
+}
+
+## Run some command N times
+runn() {
+  if [ $# -lt 2 ]
+  then
+    echo "2 arguments required: (1) Number of times you want to run the command, (2) The \
+command to run"
+    return
+  fi
+  for ((i=1;i<=$1;i++)); do $2; done
+}
+
+## Attach tmux session
+ta() {
+  tmux a -t $@
+}
+
+## New tmux session
+tn() {
+  [[ -z "$2" ]] && WORKING_DIR=~ || WORKING_DIR=$2
+  tmux new -s $1 -c $WORKING_DIR
+}
+
+## open buffer output in vim
+v() {
+  $@ | vim -R -
+}
+
+## fzf completion function for git
+_fzf_complete_git() {
+  _fzf_complete -- "$@" < <(
+    git --help -a | grep -E '^\s+' | awk '{print $1}'
+  )
+}
+
+## custom fzf completion for certain commands
+_fzf_comprun() {
+  local command=$1
+  shift
+
+  case "$command" in
+    tree)         find . -type d | fzf --preview 'tree -C {}' "$@" ;;
+    *)            fzf "$@" ;;
+  esac
+}
 # ----- FUNCTIONS -----
 
 # Load all the shell dotfiles
-for file in ~/.{functions,work,secrets}; do
+for file in ~/.{work,secrets}; do
   [ -r "$file" ] && . "$file"
 done;
 unset file;
