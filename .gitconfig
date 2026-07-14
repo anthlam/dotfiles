@@ -39,7 +39,7 @@
 	co = checkout
 	fa = fetch --all
 	pf = push --force-with-lease
-	po = pull origin
+	u = pull origin
 	s = status -s
 	st = status
 
