@@ -61,7 +61,6 @@
 	ctags = !.git/hooks/ctags
 
 [init]
-	templateDir = ~/.git_template
   defaultBranch = main
 
 [grep]
@@ -73,9 +72,11 @@
 [merge]
 	conflictStyle = diff3
 
-[includeIf "gitdir:~/code/work/"]
+# Work is the default everywhere (incl. ~/.claude/plugins clones)
+[include]
   path = ~/.gitconfig.work
 
+# Personal overrides — only inside ~/code/me
 [includeIf "gitdir:~/code/me/"]
   path = ~/.gitconfig.personal
 

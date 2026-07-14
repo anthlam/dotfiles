@@ -1,9 +1,14 @@
 [user]
   email = lamorte@gmail.com
-  signingKey = ""
 
 [commit]
   gpgsign = false
 
 [core]
   sshCommand = ssh
+
+[credential]
+  helper =
+
+[init]
+	templateDir = ~/.git_template
