@@ -348,5 +348,5 @@ command -v fzf >/dev/null 2>&1 && eval "$(fzf --bash)"
 [ -r "$HOME/.bashrc.local" ] && . "$HOME/.bashrc.local"
 
 # ----- EVERYTHING BELOW HERE WAS AUTOMATICALLY ADDED -----
-# ----- PROBABLY BY SOME STUPID WORK BULLSHIT -----
+# ----- PROBABLY BY SOME WORK THING -----
 # ----- MOVE IT TO .bashrc.local -----
