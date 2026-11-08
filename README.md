@@ -2,33 +2,26 @@
 
 ## Usage
 
-### Quick Install
-From your `$HOME` directory, run:
-```bash
-curl https://raw.githubusercontent.com/anthlam/dotfiles/master/.macos | bash
-```
-
-### Manual Install
-If you want to review and customize before installing:
+### Install
 
 1. Clone the repo:
    ```bash
    git clone git@github.com:anthlam/dotfiles.git "${HOME}/code/me/dotfiles"
    ```
 
-2. Review and customize the `.macos` script and dotfiles as needed.
+2. Review and customize the `install` script and dotfiles as needed.
 
-3. Run the setup script:
+3. Run the setup script from the repo:
    ```bash
-   bash "${HOME}/code/me/dotfiles/.macos"
+   cd "${HOME}/code/me/dotfiles" && bash install
    ```
 
-The `.macos` script will:
+The `install` script will:
 - Install Homebrew
 - Generate SSH keys for GitHub
-- Symlink all dotfiles to your `$HOME` directory
+- Symlink dotfiles and config files (nvim, tmux, ghostty, Claude Code) into your `$HOME` directory
+- Install the latest bash and make it your shell
 - Install all packages from `.brewfile`
-- Set up neovim configuration
 - Set up fzf key bindings and fuzzy completion
 - Install and configure Spacemacs
 - Install nvm and latest Node.js LTS
@@ -41,27 +34,15 @@ The `.macos` script will:
   - [Install RVM](https://rvm.io/rvm/install)
   - Install desired ruby versions using `rvm`
 
-## Environment-Specific Configuration
+## Machine-Specific Configuration
 
-### `.secrets` - Sensitive Data
-For API keys, tokens, and other secrets that should not be committed to the repo:
+`.bashrc.local` in this repo is a template. Copy it to `~/.bashrc.local` (a copy, not a symlink) and add anything specific to that machine: work aliases, paths, API keys and other secrets.
 
-1. Copy the example file:
-   ```bash
-   cp "${HOME}/code/me/dotfiles/.secrets.example" "${HOME}/.secrets"
-   ```
-2. Add your actual secret values to `~/.secrets`
-3. Secure the file: `chmod 600 ~/.secrets`
+```bash
+cp "${HOME}/code/me/dotfiles/.bashrc.local" "${HOME}/.bashrc.local"
+chmod 600 "${HOME}/.bashrc.local"
+```
 
-This file is loaded by `.bashrc` but is never symlinked or committed to git.
+`.bashrc` sources it, so the same dotfiles repo works on personal and work machines. Keep the real file out of the repo.
 
-### `.work` - Work-Specific Configuration
-For work computer customizations (aliases, paths, functions) that differ from your personal setup:
-
-1. Copy the example file:
-   ```bash
-   cp "${HOME}/code/me/dotfiles/.work.example" "${HOME}/.work"
-   ```
-2. Add your work-specific configuration to `~/.work`
-
-This allows you to use the same dotfiles repo on both personal and work machines while maintaining environment-specific customizations.
+Git identity is separate: `.gitconfig` includes `.gitconfig.work` under `~/code/work/` and `.gitconfig.personal` under `~/code/me/`.

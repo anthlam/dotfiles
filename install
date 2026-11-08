@@ -4,10 +4,6 @@
 # TODO checkout alternatives to this install script, like using a Makefile
 
 
-# ~/install
-# Run without downloading:
-# curl -fsSL https://raw.githubusercontent.com/anthlam/dotfiles/master/install | bash
-
 # Close any open System Preferences panes, to prevent them from overriding
 # settings we’re about to change
 osascript -e 'tell application "System Preferences" to quit'
@@ -50,7 +46,7 @@ symlink() {
 echo "symlink dotfiles"
 dotfiles=(
   bash_profile
-  bashhrc
+  bashrc
   brewfile
   gitconfig
   gitconfig.personal
