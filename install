@@ -36,9 +36,9 @@ mkdir -p "${HOME}/.ssh"
 ssh-keygen -t ed25519 -C "lamorte+github@gmail.com"
 eval "$(ssh-agent -s)"
 touch "${HOME}/.ssh/config"
-echo "Host *\n AddKeysToAgent yes\n UseKeychain yes\n IdentityFile ~/.ssh/id_ed25519" | tee "${HOME}/.ssh/config"
+printf "Host *\n AddKeysToAgent yes\n UseKeychain yes\n IdentityFile ~/.ssh/id_ed25519" | tee "${HOME}/.ssh/config"
 ssh-add --apple-use-keychain "${HOME}/.ssh/id_ed25519"
-read -n1 -rsp $"*** In another shell, run 'pbcopy < ~/.ssh/id_ed25519.pub' and paste that into Github. Dotfile linking and tool installation happens next. Press enter to continue or Ctrl+C to quit.\n" key
+read -n1 -rsp $"*** In another shell, run 'pbcopy < ~/.ssh/id_ed25519.pub' and paste that into Github. Dotfile linking and tool installation happens next. Press enter to continue or Ctrl+C to quit.\n" _
 
 echo "cloning dotfiles"
 git clone git@github.com:anthlam/dotfiles.git "${HOME}/code/me/dotfiles"
@@ -106,18 +106,18 @@ brew install bash
 BREW_BASH="$(brew --prefix)/bin/bash"
 grep -qxF "${BREW_BASH}" /etc/shells || echo "${BREW_BASH}" | sudo tee -a /etc/shells
 chsh -s "${BREW_BASH}"
-exec "${SHELL}"
+"${SHELL}"
 
 echo "brew installing"
 brew bundle --file="${HOME}/.brewfile"
-read -n1 -rsp $"*** Review caveats to see if there is anything that needs to be done. Press enter to continue or Ctrl+C to quit...\n" key
+read -n1 -rsp $"*** Review caveats to see if there is anything that needs to be done. Press enter to continue or Ctrl+C to quit...\n" _
 rm "${HOME}/.brewfile"
 
 echo "setup fzf key bindings and fuzzy completion"
-$(brew --prefix)/opt/fzf/install
+"$(brew --prefix)"/opt/fzf/install
 
 echo "setting up spacemacs"
-ln -s "$(brew --prefix)/opt/emacs-mac/Emacs.app /Applications/"
+symlink "$(brew --prefix)/opt/emacs-mac/Emacs.app" "/Applications/"
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
 (cd ~/.emacs.d/ && git checkout develop)
 
@@ -128,7 +128,7 @@ echo "installing latest node lts"
 nvm install --lts --latest-npm
 echo "node --version: $(node --version)"
 echo "npm --version: $(npm --version)"
-read -n1 -rsp $"Review output so far to see if it is safe to continue. macos configuration happens next. Press enter to continue or Ctrl+C to quit\n" key
+read -n1 -rsp $"Review output so far to see if it is safe to continue. macos configuration happens next. Press enter to continue or Ctrl+C to quit\n" _
 
 echo -e "\nModifying NSUserDefaults"
 echo "UI/UX Settings"
@@ -173,7 +173,7 @@ defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 echo "disable auto-correct"
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
-read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" key
+read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" _
 echo -e "\nMouse, Keyboard, Bluetooth Settings"
 ###############################################################################
 # Trackpad, mouse, keyboard, Bluetooth accessories, and input                 #
@@ -206,7 +206,7 @@ echo "enable faster key repeat"
 defaults write NSGlobalDomain KeyRepeat -int 1
 defaults write NSGlobalDomain InitialKeyRepeat -int 12
 
-read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" key
+read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" _
 echo -e "\nPower Management Settings"
 ###############################################################################
 # Energy saving                                                               #
@@ -224,7 +224,7 @@ sudo pmset -a displaysleep 10
 echo "disable computer sleep after idle time"
 sudo systemsetup -setcomputersleep 15
 
-read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" key
+read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" _
 echo -e "\nScreen Settings"
 ###############################################################################
 # Screen                                                                      #
@@ -243,7 +243,7 @@ defaults write com.apple.screencapture type -string "png"
 echo "make fonts look better on non-retina displays"
 defaults write NSGlobalDomain AppleFontSmoothing -int 1
 
-read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" key
+read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" _
 echo -e "\nFinder Settings"
 ###############################################################################
 # Finder                                                                      #
@@ -316,7 +316,7 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
 	OpenWith -bool true \
 	Privileges -bool true
 
-read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" key
+read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" _
 echo -e "\nDock Settings"
 ###############################################################################
 # Dock, Dashboard, and hot corners                                            #
@@ -366,7 +366,7 @@ defaults write com.apple.dock showhidden -bool true
 echo "do not show recent apps in dock"
 defaults write com.apple.dock show-recents -bool false
 
-read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" key
+read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" _
 echo -e "\nTerminal & iTerm Settings"
 ###############################################################################
 # Terminal & iTerm 2                                                          #
@@ -389,7 +389,7 @@ defaults write com.apple.Terminal ShowLineMarks -int 0
 echo "do not prompt when quitting iterm"
 defaults write com.googlecode.iterm2 PromptOnQuit -bool false
 
-read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" key
+read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" _
 echo -e "\nActivity Monitor Settings"
 ###############################################################################
 # Activity Monitor                                                            #
@@ -408,7 +408,7 @@ echo "sort by CPU usage"
 defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
 defaults write com.apple.ActivityMonitor SortDirection -int 0
 
-read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" key
+read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" _
 echo -e "\nApp Store Settings"
 ###############################################################################
 # Mac App Store                                                               #
@@ -434,7 +434,7 @@ defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1
 #echo "disable app store reboot"
 #defaults write com.apple.commerce AutoUpdateRestartRequired -bool false
 
-read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" key
+read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" _
 echo -e "\nGoogle Chrome Settings"
 ###############################################################################
 # Google Chrome & Google Chrome Canary                                        #
@@ -445,7 +445,7 @@ echo "expand the print dialog by default"
 defaults write com.google.Chrome PMPrintingExpandedStateForPrint2 -bool true
 defaults write com.google.Chrome.canary PMPrintingExpandedStateForPrint2 -bool true
 
-read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" key
+read -n1 -rsp $"*** Review output so far to see if it is safe to continue. Press enter to continue or Ctrl+C to quit...\n" _
 echo -e "\nKilling Affected Applications"
 ###############################################################################
 # Kill affected applications                                                  #
